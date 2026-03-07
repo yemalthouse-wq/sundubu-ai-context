@@ -1,4 +1,105 @@
-# Sundubu Tanaka Unit Economics
+# Unit Economics
+## Sundubu Tanaka Store Model
+
+This document defines the financial structure of one store.
+
+---
+
+## Product Price
+
+Average Order Value (AOV)
+
+2100 yen
+
+---
+
+## Monthly Sales Target
+
+Target bowls per day
+
+48 bowls
+
+Operating days
+
+30
+
+Monthly volume
+
+1440 bowls
+
+Monthly revenue
+
+3,024,000 yen
+
+---
+
+## Cost Structure
+
+Food cost target
+
+30%
+
+907,200 yen
+
+Labor
+
+600,000 yen
+
+Rent
+
+150,000 – 300,000 yen
+
+Utilities / misc
+
+150,000 yen
+
+Delivery platform fees
+
+300,000 – 450,000 yen
+
+---
+
+## Expected Profit
+
+Revenue
+
+3,024,000
+
+Total cost estimate
+
+2,107,200 – 2,407,200
+
+Operating profit
+
+600,000 – 900,000 yen
+
+---
+
+## Risk Variables
+
+Key variables that affect profit:
+
+- seafood price fluctuation
+- delivery platform commission
+- local rent pressure
+
+---
+
+## Store Survival Rule
+
+If profit falls below
+
+300,000 yen / month
+
+store model must be redesigned.
+
+---
+
+## OS Principle
+
+The store is not a restaurant.
+
+It is a food production node inside a city logistics network.# Sundubu Tanaka Unit Economics
 
 ## 売上モデル
 
