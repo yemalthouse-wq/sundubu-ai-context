@@ -124,3 +124,42 @@ AI collaborators:
 - ChatGPT
 - Claude
 - Gemini
+# Sundubu Tanaka OS
+
+## Core System
+
+core/
+ブランド・思想・基本設計
+
+## Market
+
+market/
+都市分析・エリア戦略
+
+## Store Model
+
+store/
+店舗フォーマット
+厨房仕様
+オペレーション
+
+## Economics
+
+cost/
+利益構造
+原価モデル
+
+fc/
+FC本部設計
+出店アルゴリズム
+ユニットエコノミクス
+
+## Delivery
+
+delivery/
+デリバリー戦略
+
+## Midnight
+
+midnight/
+夜営業モデル
