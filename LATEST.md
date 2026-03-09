@@ -1,35 +1,87 @@
 # LATEST
 
-## Current State
-Sundubu Tanaka FC expansion OS is structurally fixed.
+**最終更新：2026-03-10**
 
-## Fixed Files
-- AI_CONTEXT.md
-- DECISION_LOG.md
-- ROADMAP.md
+---
 
-## Current Task
-- Create and update fc/pilot/shin_maruko.md
-- Verify Shin-Maruko as Pilot Store 0
-- Confirm kitchen compatibility
-- Confirm Uber demand
-- Confirm operator intent
+## 事業構造（確定）
 
-## Current Model
-Type 1:
-Lunch insertion model for existing kitchens.
+2事業は**並列関係**。法人格のみ異なる。
 
-## Next Action
-1. Push AI_CONTEXT.md
-2. Push DECISION_LOG.md
-3. Push ROADMAP.md
-4. Push LATEST.md
-5. Push fc/pilot/shin_maruko.md
+| 事業 | 業態 | 法人格 | 状態 |
+|---|---|---|---|
+| スンドゥブ田中家 | 韓国風スンドゥブ専門店（中目黒） | 法人化予定 | 卸販売展開中・FC開発中 |
+| Ye Malthouse | イギリス風パブ（中目黒） | 個人事業主継続 | 開業済み・DX推進中 |
 
-## Important Note
-All future analysis must follow:
+---
 
-AI_CONTEXT.md
-→ DECISION_LOG.md
-→ LATEST.md
-→ ROADMAP.md
+## 現在のフェーズ
+
+**Phase 1：卸販売パイロット検証**
+
+- パイロット店：**新丸子**（進行中）
+- Go/No-Go 期限：**2026年10月**
+- 検証内容：売上・原価・オペレーション・本部サポート
+
+---
+
+## 確定済みモデル
+
+| 項目 | 数値 |
+|---|---|
+| ビジネスモデル | 既存厨房活用型（Type 1：ランチ/夜間挿入） |
+| 1鍋 = 20食 | 固定 |
+| 基本原価 | ¥146/食 |
+| 本部卸価格 | ¥1,600/鍋 |
+| 1BOX（10鍋・200食） | ¥50,000 |
+| 1BOX卸粗利（送料込） | ¥27,698 |
+| ロイヤリティ | 6%（供給マージン制への移行検討中） |
+| 外税表示 | 10%外税 |
+
+→ 詳細は `DECISION_LOG.md` を参照
+
+---
+
+## リポジトリ構造（整備完了）
+
+| 領域 | 場所 | 状態 |
+|---|---|---|
+| スンドゥブ田中家 全般 | ルート直下 `core/`, `cost/`, `fc/` 等 | 整備済み |
+| Ye Malthouse | `ye-malthouse/` | フォルダ・README作成済み |
+| FC本部組織（12部署） | `fc/org/` | README・担当AI欄 整備済み |
+| パイロット資料 | `fc/pilot/shin_maruko/` | 卸提案書・卸条件書・チェックリスト整備済み |
+| FC憲法 | `fc/fc_constitution.md` | 作成済み（10条） |
+
+---
+
+## 未完了・残課題
+
+| 優先度 | 内容 |
+|---|---|
+| 最優先 | 弁護士選定（FC専門・食品業界経験・初回無料） |
+| 高 | 新丸子パイロット店との卸販売契約締結 |
+| 高 | LATEST.md・AI_CONTEXT.md のYe Malthouse対応（本日完了） |
+| 中 | 各部署の担当者名 [要記入] |
+| 中 | OEMメーカー・主要仕入れ先情報 [要記入] |
+| 中 | 顧問税理士・弁護士情報 [要記入] |
+| 低 | 取引金融機関・商標登録状況 |
+
+---
+
+## 三銃士への引き継ぎ
+
+**ぐぷちゃんへ：**
+- ロイヤリティ6%（DECISION_LOG）vs ロイヤリティ廃止（fc_constitution）の矛盾を整理
+- 新丸子の卸価格（¥200/食）が本部にとって戦略的に適切か判断
+
+**ゲンちゃんへ：**
+- 本部コスト（フェーズA ¥630,000）と供給収益（¥375,000/店）のBEP分析グラフ化
+- 新丸子エリアの需要サイジング（武蔵小杉タワーマンション群）の可視化
+
+**クロちゃんへ：**
+- 次のアクション待ち（本日タスク完了）
+
+---
+
+**このファイルは常に最新状態を反映する。**
+**分析前に必ず確認すること。**
