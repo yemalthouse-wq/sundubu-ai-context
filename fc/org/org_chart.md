@@ -40,26 +40,31 @@ CEO
 
 ## 部署詳細
 
-| # | 部署名 | 担当者 | フォルダ |
-|---|---|---|---|
-| 1 | 卸受発注部 | [要記入] | `org/wholesale_orders/` |
-| 2 | カスタマーサービス部 | [要記入] | `org/customer_service/` |
-| 3 | OEM発注部 | [要記入] | `org/oem_orders/` |
-| 4 | 原材料発注部 | [要記入] | `org/ingredients/` |
-| 5 | レシピ改定部 | [要記入] | `org/recipe/` |
-| 6 | ロジスティクス部 | [要記入] | `org/logistics/` |
-| 7 | 銀行対策部 | [要記入] | `org/banking/` |
-| 8 | 税務部 | [要記入] | `org/tax/` |
-| 9 | 法務・法人化部 | [要記入] | `org/legal/` |
-| 10 | FC新規開拓部 | [要記入] | `org/fc_development/` |
-| 11 | AI-SEO部 | [要記入] | `org/ai_seo/` |
-| 12 | AI推進・業務自動化部 | [要記入] | `org/ai_ops/` |
+| # | 部署名 | 管轄 | Ye Malthouse横断 | フォルダ |
+|---|---|---|---|---|
+| 1 | 卸受発注部 | COO | ○ | `org/wholesale_orders/` |
+| 2 | カスタマーサービス部 | CEO直轄 | ○ | `org/customer_service/` |
+| 3 | OEM発注部 | COO | △ | `org/oem_orders/` |
+| 4 | 原材料発注部 | COO | ○ | `org/ingredients/` |
+| 5 | レシピ改定部 | COO | △ | `org/recipe/` |
+| 6 | ロジスティクス部 | COO | △ | `org/logistics/` |
+| 7 | 銀行対策部 | CFO | ○ | `org/banking/` |
+| 8 | 税務部 | CFO | ○ | `org/tax/` |
+| 9 | 法務・法人化部 | CEO直轄 | ○ | `org/legal/` |
+| 10 | FC新規開拓部 | CEO直轄 | × | `org/fc_development/` |
+| 11 | AI-SEO部 | CEO直轄 | **◎** | `org/ai_seo/` |
+| 12 | AI推進・業務自動化部 | CEO直轄 | **◎** | `org/ai_ops/` |
+
+凡例：◎ 即時横断適用 / ○ 適用可 / △ 条件付き / × 適用外
 
 ---
 
 ## 現状メモ
 
-- 現フェーズ：FC展開準備中（パイロット：新丸子 → 卸販売モデル）
+- **2事業は並列関係（主従なし）。法人格のみ異なる**
+  - スンドゥブ田中家：法人化予定（株式会社 or 合同会社）
+  - Ye Malthouse：個人事業主のまま継続
+- 現フェーズ：Phase 1（新丸子 卸販売パイロット準備中）
 - 多くの部署が兼務・外部委託で運営されている想定
-- 法人化・銀行対策が直近の優先課題
-- AI-SEO・AI推進部は他事業（Ye Malthouse）にも横断適用を検討
+- 法人化・銀行対策・法務整備が直近の最優先
+- AI-SEO・AI推進部は両事業に即時横断適用（コスト共有）
