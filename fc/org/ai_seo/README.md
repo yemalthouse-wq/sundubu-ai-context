@@ -29,6 +29,12 @@ Google SEOではなく、ChatGPT・Perplexity・Gemini等のAIが「スンドゥ
 
 ## 担当者
 [要記入]
+## 担当AI
+| AI | 役割 |
+|---|---|
+| クロちゃん | Schema.org JSON-LDの実装・HTMLへの埋め込み・GitHub管理 |
+| ゲンちゃん | AI推薦露出のモニタリング分析・KPIレポート・競合比較 |
+
 
 ## 対象AIプラットフォーム
 | プラットフォーム | 対策方法 | 優先度 |
@@ -58,3 +64,15 @@ Google SEOではなく、ChatGPT・Perplexity・Gemini等のAIが「スンドゥ
 - AIプラットフォームでの現在の露出状況が未調査
 - 計測ツールが未整備（AI経由の流入をどう数えるか未定義）
 - 担当者未アサイン
+
+## Ye Malthouse 横断適用
+**即時横断適用（◎）**
+
+Ye MalthouseのDX推進において最も直接的に適用できる部署。
+- `LocalBusiness` / `BarOrPub` スキーマの実装
+- 「中目黒 パブ」「中目黒 イギリスパブ」等のAI検索クエリへの最適化
+- Google ビジネスプロフィールの最適化（現在の状況確認が必要）
+- Perplexity・ChatGPTでの「中目黒 おすすめバー」推薦への露出確認
+- .nkm street magazine との連携コンテンツ（両事業のブランド露出）
+
+スンドゥブ田中家と並行して、Ye MalthouseのAI-SEO施策をPhase 1から開始する。
