@@ -112,3 +112,30 @@ sundubu-ai-context/
 | Avengers-log | /Users/seize/Avengers-log |
 | The Garage | /Users/seize/Google Drive/My Drive/The Garage |
 
+
+---
+
+## ログpush定型フロー
+
+### 運用ルール
+会話終了時にクロちゃん（チャット）がログを生成。
+CodeがそれをpushするのがDecisionです。
+
+### リポジトリパス（Mac mini ローカル）
+
+| リポジトリ | ローカルパス |
+|---|---|
+| sundubu-ai-context | /Users/seize/sundubu-ai-context |
+| Avengers-log | /Users/seize/Avengers-log |
+| The Garage | /Users/seize/Google Drive/My Drive/The Garage |
+
+### Codeへの定型指示文
+
+以下のログを3リポジトリにpushして。
+
+ファイルパス：logs/daily/YYYY-MM-DD/log.md
+既存ファイルは上書き。コンフリクトは--oursで解決。
+
+内容：
+[ここにクロちゃんが生成したログを貼る]
+
