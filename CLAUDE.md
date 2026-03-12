@@ -101,3 +101,14 @@ sundubu-ai-context/
 - AI-SEO・AI-Ops は横断部署としてコストを両事業に按分
 - 意思決定はcontext/decision_log.mdに記録し、AIが前提を忘れない状態を維持
 - FC憲法（`fc/fc_constitution.md`）はスンドゥブ田中家モデルの最上位ドキュメント
+
+---
+
+## リポジトリパス（Mac mini ローカル）
+
+| リポジトリ | ローカルパス |
+|---|---|
+| sundubu-ai-context | /Users/seize/sundubu-ai-context |
+| Avengers-log | /Users/seize/Avengers-log |
+| The Garage | /Users/seize/Google Drive/My Drive/The Garage |
+
