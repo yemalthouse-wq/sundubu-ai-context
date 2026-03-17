@@ -79,24 +79,73 @@ def check_mentor(staff_event, window_state):
         f"育成中に store_state={s} を維持")
 
 
-def check_restorer(staff_event, window_state, prev_window_state):
-    if prev_window_state is None:
+# Restorer専用定数
+RESTORER_MAX_RECOVERY_MINUTES = 30
+
+
+def check_restorer(staff_event, window_state, prev_window_state, issue_event=None):
+    """
+    [A] 近接モード: issue_event を渡すと timestamps 差分で判定（3分以内も拾える）
+    [B] window モード: prev_window_state の store_state 変化で判定（フォールバック）
+    他パターンの window 設計には影響しない。
+    """
+    has_issue_event = issue_event is not None
+    has_prev_window = prev_window_state is not None
+
+    # [1] invalid_if check
+    if not has_issue_event and not has_prev_window:
         return None
-    if not _in_window(staff_event["time"], window_state["window_start"], window_state["window_end"]):
+    if staff_event.get("event") != "issue_resolve":
         return None
-    prev = prev_window_state.get("store_state")
-    if not (staff_event.get("event") == "issue_resolve"
-            and prev in ("slow", "peak")
-            and window_state.get("store_state") == "normal"):
-        return None
-    confidence = "high" if prev == "peak" else "medium"
+
+    # [2] trigger_conditions check
+    recovery_minutes = None
+    mode = None
+
+    if has_issue_event:
+        recovery_minutes = _minutes_between(issue_event.get("time"), staff_event.get("time"))
+        if recovery_minutes is not None and recovery_minutes >= 0 and recovery_minutes <= RESTORER_MAX_RECOVERY_MINUTES:
+            mode = "proximity"
+
+    if mode is None:
+        if not has_prev_window:
+            return None
+        if not _in_window(staff_event["time"], window_state["window_start"], window_state["window_end"]):
+            return None
+        if not (prev_window_state.get("store_state") in ("slow", "peak")
+                and window_state.get("store_state") == "normal"):
+            return None
+        mode = "window"
+
+    # [3] confidence_hint
+    if mode == "proximity":
+        confidence = "high" if recovery_minutes <= 3 else "medium" if recovery_minutes <= 10 else "low"
+        prev_state = issue_event.get("store_state", "unknown")
+        window_label = f"{issue_event.get('time')}-{staff_event.get('time')}"
+    else:
+        prev_state = prev_window_state.get("store_state")
+        confidence = "high" if prev_state == "peak" else "medium"
+        window_label = f"{window_state['window_start']}-{window_state['window_end']}"
+
+    # [4] candidate_output build
+    source_refs = {
+        "staff_event_id": staff_event.get("id"),
+        "store_event_ids": window_state.get("store_event_ids", []),
+        "delivery_order_ids": window_state.get("delivery_order_ids", []),
+        "detection_mode": mode,
+    }
+    if mode == "proximity":
+        source_refs["issue_event_id"] = issue_event.get("id")
+        source_refs["recovery_minutes"] = recovery_minutes
+    else:
+        source_refs["prev_store_event_ids"] = prev_window_state.get("store_event_ids", [])
+
+    note = (f"{prev_state} → normal ({recovery_minutes}分で復旧) [近接検出]"
+            if mode == "proximity"
+            else f"{prev_state} → normal への復旧 [window検出]")
+
     return DropCandidate("Restorer", staff_event["staff"], staff_event["date"],
-        f"{window_state['window_start']}-{window_state['window_end']}", confidence,
-        {"staff_event_id": staff_event.get("id"),
-         "store_event_ids": window_state.get("store_event_ids", []),
-         "prev_store_event_ids": prev_window_state.get("store_event_ids", []),
-         "delivery_order_ids": window_state.get("delivery_order_ids", [])},
-        f"{prev} → normal への復旧")
+        window_label, confidence, source_refs, note)
 
 
 def check_stabilizer(staff_event, window_state):
@@ -120,6 +169,16 @@ def check_stabilizer(staff_event, window_state):
         f"ワンオペ peak完走 delivery {d}件")
 
 
+def _minutes_between(start_time, end_time):
+    """Restorer近接モード専用。他パターンでは使用しない。"""
+    try:
+        s = datetime.strptime(start_time, "%H:%M")
+        e = datetime.strptime(end_time, "%H:%M")
+        return int((e - s).total_seconds() // 60)
+    except (ValueError, TypeError):
+        return None
+
+
 def _in_window(time_str, window_start, window_end):
     try:
         t = datetime.strptime(time_str, "%H:%M")
@@ -130,12 +189,13 @@ def _in_window(time_str, window_start, window_end):
         return False
 
 
-def run_all_patterns(staff_event, window_state, prev_window_state=None):
+def run_all_patterns(staff_event, window_state, prev_window_state=None, issue_event=None):
+    """issue_event: Restorer近接モード用。省略時はwindowモードで動作。"""
     candidates = []
     for checker in [
         lambda: check_guardian(staff_event, window_state),
         lambda: check_mentor(staff_event, window_state),
-        lambda: check_restorer(staff_event, window_state, prev_window_state),
+        lambda: check_restorer(staff_event, window_state, prev_window_state, issue_event),
         lambda: check_stabilizer(staff_event, window_state),
     ]:
         result = checker()
