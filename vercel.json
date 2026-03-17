@@ -1,0 +1,5 @@
+{
+  "buildCommand": "pip install openpyxl && python3 scripts/build_delivery_orders.py",
+  "outputDirectory": "public",
+  "installCommand": "echo no install"
+}
