@@ -1,13 +1,24 @@
-{
-  "date": "2026-03-19",
-  "platform": "uber",
-  "orders": [
-    {
-      "item_name": "スンドゥブ",
-      "qty": 3,
-      "gross": 2700,
-      "fee": 810,
-      "delay_flag": false
-    }
-  ]
-}
+[
+  {
+    "date": "2026-03-17",
+    "timestamp": "2026-03-17T19:12:00",
+    "platform": "uber",
+    "order_id": "UB_001",
+    "item": "スンドゥブ田中家定番セット",
+    "qty": 1,
+    "gross": 1480,
+    "fee": 518,
+    "net": 962
+  },
+  {
+    "date": "2026-03-17",
+    "timestamp": "2026-03-17T19:25:00",
+    "platform": "rocketnow",
+    "order_id": "RN_001",
+    "item": "期間限定スタミナもつドゥブ",
+    "qty": 2,
+    "gross": 2960,
+    "fee": 444,
+    "net": 2516
+  }
+]
