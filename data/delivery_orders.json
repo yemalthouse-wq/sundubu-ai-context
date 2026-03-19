@@ -1,0 +1,13 @@
+{
+  "date": "2026-03-19",
+  "platform": "uber",
+  "orders": [
+    {
+      "item_name": "スンドゥブ",
+      "qty": 3,
+      "gross": 2700,
+      "fee": 810,
+      "delay_flag": false
+    }
+  ]
+}
