@@ -1,5 +1,5 @@
 {
-  "buildCommand": "pip install openpyxl && python3 scripts/build_delivery_orders.py",
+  "buildCommand": "python3 -m pip install openpyxl --break-system-packages && python3 scripts/build_delivery_orders.py",
   "outputDirectory": "public",
   "installCommand": "echo no install"
 }
