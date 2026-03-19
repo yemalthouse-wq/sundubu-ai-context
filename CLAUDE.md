@@ -109,7 +109,7 @@ sundubu-ai-context/
 | リポジトリ | ローカルパス |
 |---|---|
 | sundubu-ai-context | /Users/seize/sundubu-ai-context |
-| Avengers-log | /Users/seize/Avengers-log |
+| ops-log | /Users/seize/ops-log |
 | The Garage | /Users/seize/Google Drive/My Drive/The Garage |
 
 
@@ -126,7 +126,7 @@ CodeがそれをpushするのがDecisionです。
 | リポジトリ | ローカルパス |
 |---|---|
 | sundubu-ai-context | /Users/seize/sundubu-ai-context |
-| Avengers-log | /Users/seize/Avengers-log |
+| ops-log | /Users/seize/ops-log |
 | The Garage | /Users/seize/Google Drive/My Drive/The Garage |
 
 ### Codeへの定型指示文
