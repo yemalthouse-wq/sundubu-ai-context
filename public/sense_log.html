@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="x-color-scheme" content="light"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>気づきログ</title>
+<style> :root { color-scheme: light; } body { background-color: #fdf6e3 !important; color: #5c4b37 !important; }
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#f5f2eb;font-family:"Hiragino Sans",sans-serif;padding:40px 20px;min-height:100vh}
+.wrap{max-width:600px;margin:0 auto}
+h1{font-size:20px;font-weight:500;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid #d8d0c4;color:#2a2520}
+.card{background:#faf8f3;border:1px solid #d8d0c4;border-radius:4px;padding:20px;margin-bottom:24px}
+.types{display:flex;gap:8px;margin-bottom:14px}
+.t{flex:1;padding:7px 0;border:1px solid #d8d0c4;background:none;border-radius:3px;font-size:13px;cursor:pointer;font-family:inherit}
+.t.on{background:#2a2520;color:#f5f2eb;border-color:#2a2520}
+textarea{width:100%;border:none;background:none;font-family:inherit;font-size:14px;line-height:1.8;resize:none;outline:none;min-height:56px}
+.foot{display:flex;justify-content:flex-end;margin-top:12px;padding-top:12px;border-top:1px solid #d8d0c4}
+.save{padding:7px 20px;background:#2a2520;color:#f5f2eb;border:none;border-radius:3px;font-size:12px;cursor:pointer;font-family:inherit}
+.meta{display:flex;justify-content:space-between;margin-bottom:10px;font-size:11px;color:#9a9088}
+.item{background:#faf8f3;border:1px solid #d8d0c4;border-left:3px solid #999;border-radius:0 4px 4px 0;padding:12px 16px;margin-bottom:8px;position:relative}
+.item[data-t="違和感"]{border-left-color:#c45c3a}
+.item[data-t="判断"]{border-left-color:#3a6b8a}
+.item[data-t="改善"]{border-left-color:#4a7a5a}
+.ltype{font-size:10px;font-weight:500}
+.item[data-t="違和感"] .ltype{color:#c45c3a}
+.item[data-t="判断"] .ltype{color:#3a6b8a}
+.item[data-t="改善"] .ltype{color:#4a7a5a}
+.ltime{font-size:10px;color:#9a9088}
+.ltext{font-size:14px;line-height:1.7;margin-top:4px}
+.del{position:absolute;top:8px;right:10px;background:none;border:none;color:#ccc;cursor:pointer;font-size:13px}
+.del:hover{color:#c45c3a}
+.empty{text-align:center;padding:40px;color:#9a9088;font-size:13px}
+</style>
+</head>
+<body style="background:#f5f2eb;color:#2a2520">
+<div class="wrap">
+<h1>気づきログ</h1>
+<div class="card">
+<div class="types">
+<button class="t on" onclick="sel(this,'違和感')">違和感</button>
+<button class="t" onclick="sel(this,'判断')">判断</button>
+<button class="t" onclick="sel(this,'改善')">改善</button>
+</div>
+<textarea id="txt" placeholder="今感じていること、一行でいい。" onkeydown="if(event.key=='Enter'&&!event.shiftKey){event.preventDefault();save()}"></textarea>
+<div class="foot"><button class="save" onclick="save()">保存 ↵</button></div>
+</div>
+<div id="list"></div>
+</div>
+<script>
+let cur="違和感";
+let logs=JSON.parse(localStorage.getItem("sl")||"[]");
+function sel(el,t){cur=t;document.querySelectorAll(".t").forEach(b=>b.classList.remove("on"));el.classList.add("on");document.getElementById("txt").focus()}
+function save(){let v=document.getElementById("txt").value.trim();if(!v)return;logs.unshift({id:Date.now(),ts:new Date().toISOString(),t:cur,v});localStorage.setItem("sl",JSON.stringify(logs));document.getElementById("txt").value="";render()}
+function del(id){logs=logs.filter(l=>l.id!==id);localStorage.setItem("sl",JSON.stringify(logs));render()}
+function fmt(s){let d=new Date(s);return(d.getMonth()+1)+"/"+(d.getDate())+" "+String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0")}
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;")}
+function render(){let el=document.getElementById("list");if(!logs.length){el.innerHTML="<div class=empty>まだログはない</div>";return}el.innerHTML=logs.map(l=>`<div class="item" data-t="${l.t}"><div class="meta"><span class="ltype">${l.t}</span><span class="ltime">${fmt(l.ts)}</span></div><div class="ltext">${esc(l.v)}</div><button class="del" onclick="del(${l.id})">×</button></div>`).join("")}
+render();document.getElementById("txt").focus();
+</script>
+</body>
+</html>
