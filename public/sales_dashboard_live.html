@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>売上ダッシュボード v1</title>
+  <style>
+    :root {
+      --bg: #f6f3ea;
+      --panel: #fffdf8;
+      --border: #ddd4c6;
+      --text: #241f19;
+      --muted: #766f63;
+      --danger: #c43d32;
+      --ok: #4d8b63;
+      --warn: #b6811d;
+      --accent: #456fae;
+      --shadow: 0 1px 2px rgba(0,0,0,.04);
+      --radius: 14px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 18px;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .titlebox {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px;
+      flex: 1;
+    }
+    h1 {
+      margin: 0 0 6px;
+      font-size: 30px;
+      line-height: 1.2;
+    }
+    .sub { color: var(--muted); font-size: 14px; }
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-width: 170px;
+    }
+    .btn {
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--text);
+      border-radius: 10px;
+      padding: 11px 14px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .btn.primary { background: var(--text); color: #fff; border-color: var(--text); }
+    .btn:disabled { opacity: .6; cursor: not-allowed; }
+    .tabbar {
+      display: flex;
+      gap: 8px;
+      margin: 14px 0 18px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+    .tab {
+      white-space: nowrap;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      border-radius: 999px;
+      padding: 10px 14px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .tab.active { background: var(--text); color: #fff; border-color: var(--text); }
+    .banner {
+      display: none;
+      margin-bottom: 16px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: #fff7f5;
+      border: 1px solid #efc1bb;
+      color: var(--danger);
+      font-size: 14px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 12px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 16px;
+    }
+    .label { color: var(--muted); font-size: 13px; margin-bottom: 8px; }
+    .value { font-size: 30px; font-weight: 700; line-height: 1.1; }
+    .value.small { font-size: 22px; }
+    .meta { color: var(--muted); font-size: 13px; margin-top: 6px; }
+    .danger { color: var(--danger); }
+    .ok { color: var(--ok); }
+    .warn { color: var(--warn); }
+    .section {
+      margin-top: 18px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 16px;
+    }
+    .section h2 { margin: 0 0 12px; font-size: 18px; }
+    .bar {
+      width: 100%;
+      height: 26px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: #e6e0d3;
+      display: flex;
+    }
+    .bar > div {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: #fff;
+      min-width: 0;
+    }
+    .legend { display: flex; gap: 16px; margin-top: 10px; flex-wrap: wrap; font-size: 14px; }
+    .dot { display:inline-block; width:12px; height:12px; border-radius:50%; margin-right:6px; vertical-align:middle; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    th, td {
+      padding: 12px 8px;
+      border-top: 1px solid #ece5d8;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { color: var(--muted); font-weight: 600; font-size: 13px; }
+    .pill {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      border: 1px solid var(--border);
+      background: #fff;
+    }
+    .status-danger { color: var(--danger); border-color: #efc1bb; background: #fff7f5; }
+    .status-ok { color: var(--ok); border-color: #b9d3c2; background: #f7fbf8; }
+    .status-warn { color: var(--warn); border-color: #ecd8a5; background: #fffaf0; }
+    .platform-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 12px;
+    }
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .mini {
+      border: 1px solid #ece5d8;
+      border-radius: 10px;
+      padding: 10px;
+      background: #fff;
+    }
+    .alert-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0,1fr));
+      gap: 12px;
+    }
+    .alert-card {
+      text-align: center;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 10px;
+    }
+    .alert-card .n { font-size: 34px; font-weight: 700; line-height: 1; }
+    .hidden { display:none !important; }
+    .footer-note { margin-top: 12px; font-size: 12px; color: var(--muted); }
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .alert-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    }
+    @media (max-width: 640px) {
+      .wrap { padding: 12px; }
+      .header { flex-direction: column; }
+      .actions { min-width: 0; width: 100%; }
+      .grid, .platform-grid, .alert-grid, .mini-grid { grid-template-columns: 1fr; }
+      h1 { font-size: 26px; }
+      .value { font-size: 28px; }
+      th:nth-child(3), td:nth-child(3), th:nth-child(4), td:nth-child(4), th:nth-child(5), td:nth-child(5) {
+        display:none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="header">
+      <div class="titlebox">
+        <h1>デリバリー売上ダッシュボード</h1>
+        <div class="sub">実データ接続版 / delivery_orders.json 直結</div>
+      </div>
+      <div class="actions">
+        <button class="btn primary" id="reloadBtn">更新</button>
+        <button class="btn" id="rawBtn">生データを開く</button>
+        <div class="sub" id="updatedAt">更新待ち</div>
+      </div>
+    </div>
+
+    <div class="tabbar">
+      <button class="tab active" data-tab="overview">Overview</button>
+      <button class="tab" data-tab="platforms">Platforms</button>
+      <button class="tab" data-tab="alerts">Alerts</button>
+    </div>
+
+    <div class="banner" id="dependencyBanner"></div>
+
+    <div id="errorBox" class="section hidden"></div>
+
+    <section id="overview" class="tabview">
+      <div class="grid">
+        <div class="card"><div class="label">売上</div><div class="value" id="grossTotal">-</div><div class="meta">gross_total</div></div>
+        <div class="card"><div class="label">手数料</div><div class="value danger" id="feeTotal">-</div><div class="meta">fee_total</div></div>
+        <div class="card"><div class="label">利益</div><div class="value ok" id="netTotal">-</div><div class="meta">net_total</div></div>
+        <div class="card"><div class="label">注文数</div><div class="value" id="orderCount">-</div><div class="meta" id="orderMeta">-</div></div>
+      </div>
+
+      <div class="section">
+        <h2>売上内訳</h2>
+        <div class="bar">
+          <div id="netBar" style="background: var(--ok); width:0%"></div>
+          <div id="feeBar" style="background: var(--danger); width:0%"></div>
+        </div>
+        <div class="legend">
+          <span><span class="dot" style="background: var(--ok)"></span><span id="netLegend">利益 0%</span></span>
+          <span><span class="dot" style="background: var(--danger)"></span><span id="feeLegend">手数料 0%</span></span>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>注文明細</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>商品</th>
+              <th>数量</th>
+              <th>売上</th>
+              <th>手数料</th>
+              <th>利益</th>
+              <th>状態</th>
+            </tr>
+          </thead>
+          <tbody id="ordersBody"></tbody>
+        </table>
+        <div class="footer-note">まずは実データで動くことを優先。分析拡張はまだ封印。</div>
+      </div>
+    </section>
+
+    <section id="platforms" class="tabview hidden">
+      <div class="platform-grid" id="platformGrid"></div>
+    </section>
+
+    <section id="alerts" class="tabview hidden">
+      <div class="alert-grid" id="alertGrid"></div>
+      <div class="section" style="margin-top:14px;">
+        <h2>判定ルール</h2>
+        <table>
+          <tbody>
+            <tr><th>fee_rate > 33%</th><td>赤扱い</td></tr>
+            <tr><th>cancel_rate > 10%</th><td>赤扱い</td></tr>
+            <tr><th>dependency > 45%</th><td>依存警告</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const DATA_URL = 'https://sundubu-ai-context.vercel.app/data/delivery_orders.json';
+
+    document.getElementById('reloadBtn').addEventListener('click', loadData);
+    document.getElementById('rawBtn').addEventListener('click', () => window.open(DATA_URL, '_blank'));
+
+    document.querySelectorAll('.tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tabview').forEach(v => v.classList.add('hidden'));
+        btn.classList.add('active');
+        document.getElementById(btn.dataset.tab).classList.remove('hidden');
+      });
+    });
+
+    function yen(v) {
+      return '¥' + Number(v || 0).toLocaleString('ja-JP');
+    }
+    function pct(v) {
+      return Math.round((Number(v || 0)) * 1000) / 10 + '%';
+    }
+    function esc(s) {
+      return String(s ?? '')
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
+    }
+    function statusPill(order) {
+      const status = (order.status || 'ok').toLowerCase();
+      if (order.cancel_flag || status.includes('cancel')) return '<span class="pill status-danger">cancel</span>';
+      if (order.delay_flag || status.includes('delay')) return '<span class="pill status-warn">delay</span>';
+      if (status.includes('pending')) return '<span class="pill status-warn">pending</span>';
+      return '<span class="pill status-ok">ok</span>';
+    }
+
+    function normalize(data) {
+      const orders = Array.isArray(data.orders) ? data.orders : [];
+      const k = data.kpi || {};
+      const gross = Number(k.gross_total ?? 0);
+      const fee = Number(k.fee_total ?? 0);
+      const net = Number(k.net_total ?? 0);
+      const orderCount = Number(k.order_count ?? orders.length ?? 0);
+      const itemQty = Number(k.item_qty_total ?? orders.reduce((a,o)=>a+Number(o.qty||0),0));
+      const feeRate = Number(k.fee_rate ?? (gross ? fee / gross : 0));
+
+      const grouped = {};
+      orders.forEach(o => {
+        const p = (o.platform || data.platform || 'unknown').toLowerCase();
+        if (!grouped[p]) grouped[p] = { platform: p, gross: 0, fee: 0, net: 0, orders: 0, items: 0, cancelled: 0, delayed: 0, pending: 0 };
+        grouped[p].gross += Number(o.gross || 0);
+        grouped[p].fee += Number(o.total_fees ?? o.fee ?? 0);
+        grouped[p].net += Number(o.net ?? (Number(o.gross||0) - Number(o.total_fees ?? o.fee ?? 0)));
+        grouped[p].orders += 1;
+        grouped[p].items += Number(o.qty || 0);
+        if (o.cancel_flag || String(o.status || '').toLowerCase().includes('cancel')) grouped[p].cancelled += 1;
+        if (o.delay_flag || String(o.status || '').toLowerCase().includes('delay')) grouped[p].delayed += 1;
+        if (String(o.status || '').toLowerCase().includes('pending')) grouped[p].pending += 1;
+      });
+      const platforms = Object.values(grouped).map(p => ({
+        ...p,
+        fee_rate: p.gross ? p.fee / p.gross : 0,
+        cancel_rate: p.orders ? p.cancelled / p.orders : 0,
+        delay_rate: p.orders ? p.delayed / p.orders : 0,
+        dependency: gross ? p.gross / gross : 0,
+      }));
+
+      const alerts = {
+        reconciled: orders.filter(o => o._reconciled === true).length,
+        cancelled: orders.filter(o => o.cancel_flag || String(o.status||'').toLowerCase().includes('cancel')).length,
+        delayed: orders.filter(o => o.delay_flag || String(o.status||'').toLowerCase().includes('delay')).length,
+        pending: orders.filter(o => String(o.status||'').toLowerCase().includes('pending')).length,
+        fee_mismatch: orders.filter(o => Number(o.other_fee || 0) >= 2).length,
+      };
+
+      const topDependency = platforms.slice().sort((a,b)=>b.dependency-a.dependency)[0];
+      return { orders, gross, fee, net, orderCount, itemQty, feeRate, platforms, alerts, topDependency, raw: data };
+    }
+
+    function renderOverview(m) {
+      document.getElementById('grossTotal').textContent = yen(m.gross);
+      document.getElementById('feeTotal').textContent = yen(m.fee);
+      document.getElementById('netTotal').textContent = yen(m.net);
+      document.getElementById('orderCount').textContent = Number(m.orderCount || 0).toLocaleString('ja-JP');
+      document.getElementById('orderMeta').textContent = `${m.itemQty}点 / 手数料率 ${pct(m.feeRate)}`;
+
+      const netPct = m.gross ? Math.max(0, (m.net / m.gross) * 100) : 0;
+      const feePct = m.gross ? Math.max(0, (m.fee / m.gross) * 100) : 0;
+      document.getElementById('netBar').style.width = netPct + '%';
+      document.getElementById('feeBar').style.width = feePct + '%';
+      document.getElementById('netBar').textContent = netPct > 12 ? `利益 ${yen(m.net)}` : '';
+      document.getElementById('feeBar').textContent = feePct > 12 ? `手数料 ${yen(m.fee)}` : '';
+      document.getElementById('netLegend').textContent = `利益 ${pct(netPct/100)}`;
+      document.getElementById('feeLegend').textContent = `手数料 ${pct(feePct/100)}`;
+
+      const body = document.getElementById('ordersBody');
+      body.innerHTML = '';
+      m.orders.forEach(o => {
+        const tr = document.createElement('tr');
+        const fee = Number(o.total_fees ?? o.fee ?? 0);
+        const net = Number(o.net ?? (Number(o.gross||0) - fee));
+        tr.innerHTML = `
+          <td>${esc(o.product_name || o.item_name || '-')}</td>
+          <td>${Number(o.qty||0)}</td>
+          <td>${yen(o.gross)}</td>
+          <td class="danger">${yen(fee)}</td>
+          <td class="ok">${yen(net)}</td>
+          <td>${statusPill(o)}</td>
+        `;
+        body.appendChild(tr);
+      });
+    }
+
+    function renderPlatforms(m) {
+      const grid = document.getElementById('platformGrid');
+      grid.innerHTML = '';
+      if (!m.platforms.length) {
+        grid.innerHTML = '<div class="card">プラットフォームデータなし</div>';
+        return;
+      }
+      m.platforms.forEach(p => {
+        const feeCls = p.fee_rate > 0.33 ? 'danger' : '';
+        const depCls = p.dependency > 0.45 ? 'danger' : '';
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <div class="label">${esc(p.platform.toUpperCase())}</div>
+          <div class="mini-grid">
+            <div class="mini"><div class="label">売上</div><div class="value small">${yen(p.gross)}</div></div>
+            <div class="mini"><div class="label">利益</div><div class="value small ok">${yen(p.net)}</div></div>
+            <div class="mini"><div class="label">注文数</div><div class="value small">${p.orders}</div></div>
+          </div>
+          <div class="mini-grid">
+            <div class="mini"><div class="label">手数料率</div><div class="value small ${feeCls}">${pct(p.fee_rate)}</div></div>
+            <div class="mini"><div class="label">cancel率</div><div class="value small ${p.cancel_rate > 0.1 ? 'danger' : ''}">${pct(p.cancel_rate)}</div></div>
+            <div class="mini"><div class="label">依存率</div><div class="value small ${depCls}">${pct(p.dependency)}</div></div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function renderAlerts(m) {
+      const defs = [
+        ['reconciled', 'reconciled', m.alerts.reconciled],
+        ['cancelled', 'cancelled', m.alerts.cancelled],
+        ['delayed', 'delayed', m.alerts.delayed],
+        ['pending', 'pending', m.alerts.pending],
+        ['fee_mismatch', 'fee mismatch', m.alerts.fee_mismatch],
+      ];
+      const grid = document.getElementById('alertGrid');
+      grid.innerHTML = '';
+      defs.forEach(([key, label, n]) => {
+        const div = document.createElement('div');
+        const cls = n > 0 ? (key === 'cancelled' || key === 'fee_mismatch' ? 'danger' : 'warn') : '';
+        div.className = 'alert-card';
+        div.innerHTML = `<div class="label">${label}</div><div class="n ${cls}">${n}</div>`;
+        grid.appendChild(div);
+      });
+      const banner = document.getElementById('dependencyBanner');
+      if (m.topDependency && m.topDependency.dependency > 0.45) {
+        banner.style.display = 'block';
+        banner.textContent = `${m.topDependency.platform.toUpperCase()} 依存率 ${pct(m.topDependency.dependency)}。45%超なので集中リスクあり。`;
+      } else {
+        banner.style.display = 'none';
+      }
+    }
+
+    async function loadData() {
+      const errorBox = document.getElementById('errorBox');
+      errorBox.classList.add('hidden');
+      try {
+        document.getElementById('updatedAt').textContent = '更新中...';
+        const res = await fetch(DATA_URL, { cache: 'no-store' });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        const model = normalize(data);
+        renderOverview(model);
+        renderPlatforms(model);
+        renderAlerts(model);
+        document.getElementById('updatedAt').textContent = `更新: ${new Date().toLocaleString('ja-JP')}`;
+      } catch (e) {
+        errorBox.textContent = '読み込み失敗: ' + e;
+        errorBox.classList.remove('hidden');
+        document.getElementById('updatedAt').textContent = '更新失敗';
+      }
+    }
+
+    loadData();
+  </script>
+</body>
+</html>
