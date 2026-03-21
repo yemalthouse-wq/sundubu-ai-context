@@ -1,250 +1,61 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html>
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>気づきログ</title>
-<style>
-:root {
-  --bg: #f5f0e6;
-  --panel: rgba(255,255,255,0.62);
-  --border: #d8d0c3;
-  --text: #2b241c;
-  --muted: #7a746c;
-  --dark: #2f2a25;
-  --blue: #4c7dc0;
-  --green: #4d8b63;
-}
-* { box-sizing: border-box; }
-html, body {
-  margin: 0;
-  padding: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-}
-body { padding: 12px; }
-.container {
-  width: 100%;
-  max-width: 680px;
-  margin: 0 auto;
-}
-h2 {
-  margin: 8px 2px 14px;
-  font-size: 28px;
-  font-weight: 700;
-}
-.panel {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 14px;
-}
-.type-buttons {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  margin-bottom: 12px;
-}
-.type-buttons button {
-  min-height: 48px;
-  padding: 10px 8px;
-  border: 1px solid #cfc6b8;
-  background: #fffdf8;
-  color: var(--blue);
-  border-radius: 10px;
-  font-size: 18px;
-  font-weight: 500;
-}
-.type-buttons button.active {
-  background: var(--dark);
-  color: white;
-  border-color: var(--dark);
-}
-textarea {
-  width: 100%;
-  min-height: 88px;
-  max-height: 180px;
-  border: none;
-  border-bottom: 1px solid var(--border);
-  background: transparent;
-  resize: vertical;
-  font-size: 18px;
-  line-height: 1.5;
-  outline: none;
-  color: var(--text);
-  padding: 6px 2px 10px;
-}
-.actions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-top: 14px;
-}
-.actions button {
-  min-height: 48px;
-  padding: 12px 14px;
-  border: none;
-  border-radius: 10px;
-  background: var(--dark);
-  color: white;
-  font-size: 17px;
-  font-weight: 600;
-}
-.export-btn { background: #6b6257 !important; }
-.log { margin-top: 16px; }
-.item {
-  background: rgba(255,255,255,0.74);
-  padding: 12px;
-  margin-bottom: 10px;
-  border-radius: 10px;
-  border-left: 5px solid #999;
-}
-.item-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 12px;
-  color: var(--muted);
-  font-size: 13px;
-  margin-bottom: 8px;
-}
-.item-body {
-  font-size: 17px;
-  line-height: 1.6;
-  word-break: break-word;
-}
-.type-違和感 { border-left-color: var(--dark); }
-.type-判断   { border-left-color: var(--blue); }
-.type-改善   { border-left-color: var(--green); }
-.delete-btn {
-  border: none;
-  background: transparent;
-  color: #aaa;
-  cursor: pointer;
-  font-size: 18px;
-  padding: 0 0 0 6px;
-}
-@media (min-width: 768px) {
-  body { padding: 20px; }
-  .panel { padding: 18px; }
-  .log { margin-top: 22px; }
-  .item { padding: 14px; margin-bottom: 12px; }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>気づきログ v0.2-rescue</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; background: #f5f0e6; }
+    .btn-group { display: flex; gap: 10px; margin-bottom: 20px; }
+    button { padding: 15px; font-size: 18px; cursor: pointer; border-radius: 8px; border: 1px solid #ccc; }
+    button.active { background: #2f2a25; color: white; }
+    textarea { width: 100%; height: 100px; margin-bottom: 20px; font-size: 18px; }
+    .save-btn { width: 100%; background: #4c7dc0; color: white; font-weight: bold; border: none; }
+    .log-item { background: white; padding: 10px; margin-top: 10px; border-radius: 5px; border-left: 5px solid #2f2a25; }
+  </style>
 </head>
 <body>
-<div class="container">
   <h2>気づきログ</h2>
-  <div class="panel">
-    <div class="type-buttons">
-      <button onclick="setType('違和感')" id="違和感" class="active">違和感</button>
-      <button onclick="setType('判断')" id="判断">判断</button>
-      <button onclick="setType('改善')" id="改善">改善</button>
-    </div>
-    <textarea id="input" placeholder="今感じていること、一行でいい。"></textarea>
-    <div class="actions">
-      <button class="export-btn" onclick="exportLogs()">Export JSON</button>
-      <button onclick="saveLog()">保存 ↵</button>
-    </div>
+  <div class="btn-group">
+    <button onclick="setType('違和感')" id="btn-違和感" class="active">違和感</button>
+    <button onclick="setType('判断')" id="btn-判断">判断</button>
+    <button onclick="setType('改善')" id="btn-改善">改善</button>
   </div>
-  <div class="log" id="list"></div>
-</div>
-<script>
-const GAS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxCSxa-PenLMs4I2GH5dkQK1WzNSOkkt1eut6w3SUx8J6bnEfeiKkxrErzmeL06CEMb/exec';
+  <textarea id="memo" placeholder="一行メモ..."></textarea>
+  <button class="save-btn" onclick="save()">保存する</button>
+  <div id="list"></div>
 
-function sendToSheets(category, memo) {
-  fetch(GAS_WEB_APP_URL, {
-    method: 'POST',
-    mode: 'cors',
- nano sense_log.html   headers: { 'Content-Type': 'text/plain' },
-    body: JSON.stringify({ category, memo })
-  }).catch(() => {});
-}
+  <script>
+    const GAS_URL = 'https://script.google.com/macros/s/AKfycbxGSxa-PenUMs4TZGiSduOKCIwzhSQkttleutew3SJux3QbnEfejKKxrErzmeL04cC5Mo/exec';
+    let currentType = '違和感';
 
-let type = "違和感";
-let logs = JSON.parse(localStorage.getItem("sense") || "[]");
+    function setType(t) {
+      currentType = t;
+      ['違和感', '判断', '改善'].forEach(type => {
+        document.getElementById('btn-' + type).classList.toggle('active', type === t);
+      });
+      console.log('選択:', t);
+    }
 
-function setType(t) {
-  type = t;
-  document.querySelectorAll(".type-buttons button").forEach(b => b.classList.remove("active"));
-  document.getElementById(t).classList.add("active");
-}
+    function save() {
+      const text = document.getElementById('memo').value.trim();
+      if (!text) return alert('入力してください');
 
-function persist() {
-  localStorage.setItem("sense", JSON.stringify(logs));
-}
+      fetch(GAS_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: JSON.stringify({ category: currentType, memo: text })
+      }).catch(() => {});
 
-function render() {
-  const list = document.getElementById("list");
-  list.innerHTML = "";
-  logs.slice().reverse().forEach((l, idx) => {
-    const actualIndex = logs.length - 1 - idx;
-    const div = document.createElement("div");
-    div.className = "item type-" + l.type;
-    const ts = new Date(l.timestamp);
-    const timeText = `${ts.getMonth()+1}/${ts.getDate()} ${String(ts.getHours()).padStart(2,'0')}:${String(ts.getMinutes()).padStart(2,'0')}`;
-    div.innerHTML = `
-      <div class="item-header">
-        <span>${l.type}</span>
-        <span>${timeText}<button class="delete-btn" onclick="deleteLog(${actualIndex})">×</button></span>
-      </div>
-      <div class="item-body">${escapeHtml(l.text)}</div>
-    `;
-    list.appendChild(div);
-  });
-}
+      const item = document.createElement('div');
+      item.className = 'log-item';
+      item.innerHTML = `<strong>${currentType}</strong>: ${text}`;
+      document.getElementById('list').prepend(item);
 
-function escapeHtml(str) {
-  return str
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-}
-
-function saveLog() {
-  const input = document.getElementById("input");
-  const text = input.value.trim();
-  if (!type || !text) return;
-  logs.push({
-    id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()),
-    timestamp: new Date().toISOString(),
-    type,
-    text
-  });
-  persist();
-  sendToSheets(type, text);
-  input.value = "";
-  render();
-}
-
-function deleteLog(index) {
-  logs.splice(index, 1);
-  persist();
-  render();
-}
-
-document.getElementById("input").addEventListener("keypress", e => {
-  if (e.key === "Enter" && !e.shiftKey) {
-    e.preventDefault();
-    saveLog();
-  }
-});
-
-function exportLogs() {
-  const blob = new Blob([JSON.stringify(logs, null, 2)], { type: "application/json" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  const today = new Date().toISOString().slice(0, 10);
-  a.href = url;
-  a.download = `sense_log_${today}.json`;
-  a.click();
-  URL.revokeObjectURL(url);
-}
-
-render();
-</script>
+      document.getElementById('memo').value = '';
+      console.log('保存:', currentType, text);
+    }
+  </script>
 </body>
 </html>
+
