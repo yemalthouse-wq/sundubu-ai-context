@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>気づきログ v0.2-rescue</title>
+  <title>気づきログ</title>
   <style>
     body { font-family: sans-serif; padding: 20px; background: #f5f0e6; }
     .btn-group { display: flex; gap: 10px; margin-bottom: 20px; }
@@ -26,7 +26,8 @@
   <div id="list"></div>
 
   <script>
-    const GAS_URL = 'https://script.google.com/macros/s/AKfycbxRUZ_-7ULIv6pWfhfn6zHb-Bb82cFaDU9Bx20cnbN4tQ0fThKQggZFiQAef8rlKzgd/exec = '違和感';
+    const GAS_URL = 'https://script.google.com/macros/s/AKfycbxRLZ-7ULkfwGWlnRadHb-Bbd2cFaDU9Bx0QtnbNHQrFHrKJggzFrGJa4H3KOgd/exec';
+    let currentType = '違和感';
 
     function setType(t) {
       currentType = t;
@@ -47,7 +48,8 @@
       }).catch(() => {});
 
       const item = document.createElement('div');
-      item.className = 'log-item'      item.innerHTML = `<strong>${currentType}</strong>: ${text}`;
+      item.className = 'log-item';
+      item.innerHTML = `<strong>${currentType}</strong>: ${text}`;
       document.getElementById('list').prepend(item);
 
       document.getElementById('memo').value = '';
@@ -56,12 +58,3 @@
   </script>
 </body>
 </html>
-
-
-
-cd ~/sundubu-ai-context/public
-
-cat sense_log.html | grep -A 2 "const GAS_URL"
-
-
-
