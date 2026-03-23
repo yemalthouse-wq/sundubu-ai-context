@@ -24,6 +24,58 @@
   <textarea id="memo" placeholder="一行メモ..."></textarea>
   <button class="save-btn" onclick="save()">保存する</button>
   <div id="list"></div>
+  <script>
+    const GAS_URL = 'https://script.google.com/macros/s/AKfycbxRLZ-7ULkfwGWlnRadHb-Bbd2cFaDU9Bx0QtnbNHQrFHrKJggzFrGJa4H3KOgd/exec';
+    let currentType = '違和感';
+    function setType(t) {
+      currentType = t;
+      ['違和感', '判断', '改善'].forEach(type => {
+        document.getElementById('btn-' + type).classList.toggle('active', type === t);
+      });
+    }
+    function save() {
+      const text = document.getElementById('memo').value.trim();
+      if (!text) return alert('入力してください');
+      fetch(GAS_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: JSON.stringify({ category: currentType, memo: text })
+      }).catch(() => {});
+      const item = document.createElement('div');
+      item.className = 'log-item';
+      item.innerHTML = '<strong>' + currentType + '</strong>: ' + text;
+      document.getElementById('list').prepend(item);
+      document.getElementById('memo').value = '';
+    }
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>気づきログ</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; background: #f5f0e6; }
+    .btn-group { display: flex; gap: 10px; margin-bottom: 20px; }
+    button { padding: 15px; font-size: 18px; cursor: pointer; border-radius: 8px; border: 1px solid #ccc; }
+    button.active { background: #2f2a25; color: white; }
+    textarea { width: 100%; height: 100px; margin-bottom: 20px; font-size: 18px; }
+    .save-btn { width: 100%; background: #4c7dc0; color: white; font-weight: bold; border: none; }
+    .log-item { background: white; padding: 10px; margin-top: 10px; border-radius: 5px; border-left: 5px solid #2f2a25; }
+  </style>
+</head>
+<body>
+  <h2>気づきログ</h2>
+  <div class="btn-group">
+    <button onclick="setType('違和感')" id="btn-違和感" class="active">違和感</button>
+    <button onclick="setType('判断')" id="btn-判断">判断</button>
+    <button onclick="setType('改善')" id="btn-改善">改善</button>
+  </div>
+  <textarea id="memo" placeholder="一行メモ..."></textarea>
+  <button class="save-btn" onclick="save()">保存する</button>
+  <div id="list"></div>
 
   <script>
     const GAS_URL = 'https://script.google.com/macros/s/AKfycbxRLZ-7ULkfwGWlnRadHb-Bbd2cFaDU9Bx0QtnbNHQrFHrKJggzFrGJa4H3KOgd/exec';
