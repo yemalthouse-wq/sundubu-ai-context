@@ -25,7 +25,7 @@
   <button class="save-btn" onclick="save()">保存する</button>
   <div id="list"></div>
   <script>
-    const GAS_URL = 'https://script.google.com/macros/s/AKfycbzD7Z88ZLKQ_kRHUFePkFOnsntGiSilUmFe0DoLg0TelIcWAlo-uVA4XM0DiSRp0bY/exec';
+    const GAS_URL = 'https://script.google.com/macros/s/AKfycbwlPvkNwoKo2Y_bMvTjNEbJS0u60SYRJM9XZ5JLX3YzFEOlXmKnzjB0Rbj3qioasCFjmg/exec';
     let currentType = '違和感';
     function setType(t) {
       currentType = t;
@@ -35,18 +35,10 @@
     }
     async function save() {
       const text = document.getElementById('memo').value.trim();
-      if (!text) {
-        alert('入力してください');
-        return;
-      }
-      const params = new URLSearchParams({
-        category: currentType,
-        memo: text
-      });
-      const finalUrl = `${GAS_URL}?${params.toString()}`;
-      console.log('送信URL:', finalUrl);
+      if (!text) return alert('入力してください');
+      const params = new URLSearchParams({ category: currentType, memo: text });
       try {
-        await fetch(finalUrl, { mode: 'no-cors' });
+        await fetch(`${GAS_URL}?${params.toString()}`, { mode: 'no-cors' });
         const item = document.createElement('div');
         item.className = 'log-item';
         item.innerHTML = `<strong>${currentType}</strong>: ${text}`;
