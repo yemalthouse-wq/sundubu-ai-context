@@ -15,11 +15,13 @@
 </head>
 <body>
   <h2>メモ</h2>
+
   <div class="btn-group">
-    <button onclick="setType('staff_違和感')" id="btn1" class="active">違和感</button>
-    <button onclick="setType('staff_判断')" id="btn2">判断</button>
-    <button onclick="setType('staff_改善')" id="btn3">改善</button>
+    <button id="btn1" class="active" onclick="setType('staff_違和感')">違和感</button>
+    <button id="btn2" onclick="setType('staff_判断')">判断</button>
+    <button id="btn3" onclick="setType('staff_改善')">改善</button>
   </div>
+
   <textarea id="memo" placeholder="思ったことを1行だけ"></textarea>
   <button class="save-btn" onclick="save()">保存する</button>
 
@@ -29,13 +31,27 @@
 
     function setType(t) {
       currentType = t;
+
+      document.querySelectorAll('.btn-group button').forEach(btn => {
+        btn.classList.remove('active');
+      });
+
+      if (t === 'staff_違和感') document.getElementById('btn1').classList.add('active');
+      if (t === 'staff_判断') document.getElementById('btn2').classList.add('active');
+      if (t === 'staff_改善') document.getElementById('btn3').classList.add('active');
     }
 
     async function save() {
       const text = document.getElementById('memo').value.trim();
       if (!text) return alert('入力してください');
-      const params = new URLSearchParams({ category: currentType, memo: text });
+
+      const params = new URLSearchParams({
+        category: currentType,
+        memo: text
+      });
+
       await fetch(`${GAS_URL}?${params.toString()}`, { mode: 'no-cors' });
+
       document.getElementById('memo').value = '';
       alert('送信しました');
     }
