@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>メモ</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; background: #f5f0e6; }
+    .btn-group { display: flex; gap: 10px; margin-bottom: 20px; }
+    button { padding: 15px; font-size: 18px; cursor: pointer; border-radius: 8px; border: 1px solid #ccc; }
+    button.active { background: #2f2a25; color: white; }
+    textarea { width: 100%; height: 100px; margin-bottom: 20px; font-size: 18px; }
+    .save-btn { width: 100%; background: #4c7dc0; color: white; font-weight: bold; border: none; }
+  </style>
+</head>
+<body>
+  <h2>メモ</h2>
+  <div class="btn-group">
+    <button onclick="setType('staff_違和感')" id="btn1" class="active">違和感</button>
+    <button onclick="setType('staff_判断')" id="btn2">判断</button>
+    <button onclick="setType('staff_改善')" id="btn3">改善</button>
+  </div>
+  <textarea id="memo" placeholder="思ったことを1行だけ"></textarea>
+  <button class="save-btn" onclick="save()">保存する</button>
+
+  <script>
+    const GAS_URL = 'https://script.google.com/macros/s/AKfycbwlPvkNwoKo2Y_bMvTjNEbJS0u60SYRJM9XZ5JLX3YzFEOlXmKnzjB0Rbj3qioasCFjmg/exec';
+    let currentType = 'staff_違和感';
+
+    function setType(t) {
+      currentType = t;
+    }
+
+    async function save() {
+      const text = document.getElementById('memo').value.trim();
+      if (!text) return alert('入力してください');
+      const params = new URLSearchParams({ category: currentType, memo: text });
+      await fetch(`${GAS_URL}?${params.toString()}`, { mode: 'no-cors' });
+      document.getElementById('memo').value = '';
+      alert('送信しました');
+    }
+  </script>
+</body>
+</html>
