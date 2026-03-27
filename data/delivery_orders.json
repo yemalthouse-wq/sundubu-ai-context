@@ -1,13 +1,19 @@
 {
   "records": [
-    {
-      "date": "2026-03-19",
-      "store": "nakameguro",
-      "platform": "uber",
-      "orders": 3,
-      "sales": 2700,
-      "fee": 810,
-      "net": 1890
-    }
+    { "date": "2026-03-21", "store": "nakameguro", "platform": "uber",      "orders": 11, "sales": 29700, "fee": 10395, "net": 19305 },
+    { "date": "2026-03-21", "store": "nakameguro", "platform": "rocketnow", "orders": 4,  "sales": 9200,  "fee": 2530,  "net": 6670  },
+    { "date": "2026-03-22", "store": "nakameguro", "platform": "uber",      "orders": 8,  "sales": 21600, "fee": 7560,  "net": 14040 },
+    { "date": "2026-03-22", "store": "nakameguro", "platform": "rocketnow", "orders": 6,  "sales": 13800, "fee": 3795,  "net": 10005 },
+    { "date": "2026-03-23", "store": "nakameguro", "platform": "uber",      "orders": 14, "sales": 37800, "fee": 13230, "net": 24570 },
+    { "date": "2026-03-23", "store": "nakameguro", "platform": "rocketnow", "orders": 5,  "sales": 11500, "fee": 3162,  "net": 8338  },
+    { "date": "2026-03-24", "store": "nakameguro", "platform": "uber",      "orders": 17, "sales": 45900, "fee": 16065, "net": 29835 },
+    { "date": "2026-03-24", "store": "nakameguro", "platform": "rocketnow", "orders": 7,  "sales": 16100, "fee": 4427,  "net": 11673 },
+    { "date": "2026-03-25", "store": "nakameguro", "platform": "uber",      "orders": 9,  "sales": 24300, "fee": 8505,  "net": 15795 },
+    { "date": "2026-03-25", "store": "nakameguro", "platform": "rocketnow", "orders": 8,  "sales": 18400, "fee": 5060,  "net": 13340 },
+    { "date": "2026-03-26", "store": "nakameguro", "platform": "uber",      "orders": 13, "sales": 35100, "fee": 12285, "net": 22815 },
+    { "date": "2026-03-26", "store": "nakameguro", "platform": "rocketnow", "orders": 5,  "sales": 11500, "fee": 3162,  "net": 8338  },
+    { "date": "2026-03-27", "store": "nakameguro", "platform": "uber",      "orders": 10, "sales": 27000, "fee": 9450,  "net": 17550 },
+    { "date": "2026-03-27", "store": "nakameguro", "platform": "rocketnow", "orders": 6,  "sales": 13800, "fee": 3795,  "net": 10005 }
   ]
 }
+
