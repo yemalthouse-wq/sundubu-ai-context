@@ -1,0 +1,13 @@
+{
+  "records": [
+    {
+      "date": "2026-03-19",
+      "store": "nakameguro",
+      "platform": "uber",
+      "orders": 3,
+      "sales": 2700,
+      "fee": 810,
+      "net": 1890
+    }
+  ]
+}
