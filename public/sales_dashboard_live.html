@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,21 +16,21 @@
       --ok: #4d8b63;
       --warn: #b6811d;
       --accent: #456fae;
-      --shadow: 0 1px 2px rgba(0,0,0,.04);
+      --shadow: 0 1px 2px rgba(0, 0, 0, .04);
       --radius: 14px;
     }
+
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background: var(--bg);
       color: var(--text);
     }
-    .wrap {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 18px;
-    }
+
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 18px; }
+
     .header {
       display: flex;
       justify-content: space-between;
@@ -37,6 +38,7 @@
       gap: 16px;
       margin-bottom: 16px;
     }
+
     .titlebox {
       background: var(--panel);
       border: 1px solid var(--border);
@@ -45,18 +47,12 @@
       padding: 20px;
       flex: 1;
     }
-    h1 {
-      margin: 0 0 6px;
-      font-size: 30px;
-      line-height: 1.2;
-    }
+
+    h1 { margin: 0 0 6px; font-size: 30px; line-height: 1.2; }
     .sub { color: var(--muted); font-size: 14px; }
-    .actions {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      min-width: 170px;
-    }
+
+    .actions { display: flex; flex-direction: column; gap: 8px; min-width: 170px; }
+
     .btn {
       border: 1px solid var(--border);
       background: #fff;
@@ -68,6 +64,7 @@
     }
     .btn.primary { background: var(--text); color: #fff; border-color: var(--text); }
     .btn:disabled { opacity: .6; cursor: not-allowed; }
+
     .tabbar {
       display: flex;
       gap: 8px;
@@ -75,6 +72,7 @@
       overflow-x: auto;
       padding-bottom: 4px;
     }
+
     .tab {
       white-space: nowrap;
       border: 1px solid var(--border);
@@ -85,6 +83,7 @@
       font-size: 14px;
     }
     .tab.active { background: var(--text); color: #fff; border-color: var(--text); }
+
     .banner {
       display: none;
       margin-bottom: 16px;
@@ -95,11 +94,13 @@
       color: var(--danger);
       font-size: 14px;
     }
+
     .grid {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0,1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 12px;
     }
+
     .card {
       background: var(--panel);
       border: 1px solid var(--border);
@@ -107,13 +108,16 @@
       box-shadow: var(--shadow);
       padding: 16px;
     }
+
     .label { color: var(--muted); font-size: 13px; margin-bottom: 8px; }
     .value { font-size: 30px; font-weight: 700; line-height: 1.1; }
     .value.small { font-size: 22px; }
     .meta { color: var(--muted); font-size: 13px; margin-top: 6px; }
+
     .danger { color: var(--danger); }
     .ok { color: var(--ok); }
     .warn { color: var(--warn); }
+
     .section {
       margin-top: 18px;
       background: var(--panel);
@@ -123,6 +127,7 @@
       padding: 16px;
     }
     .section h2 { margin: 0 0 12px; font-size: 18px; }
+
     .bar {
       width: 100%;
       height: 26px;
@@ -140,20 +145,14 @@
       color: #fff;
       min-width: 0;
     }
+
     .legend { display: flex; gap: 16px; margin-top: 10px; flex-wrap: wrap; font-size: 14px; }
-    .dot { display:inline-block; width:12px; height:12px; border-radius:50%; margin-right:6px; vertical-align:middle; }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 14px;
-    }
-    th, td {
-      padding: 12px 8px;
-      border-top: 1px solid #ece5d8;
-      text-align: left;
-      vertical-align: top;
-    }
+    .dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { padding: 12px 8px; border-top: 1px solid #ece5d8; text-align: left; vertical-align: top; }
     th { color: var(--muted); font-weight: 600; font-size: 13px; }
+
     .pill {
       display: inline-block;
       padding: 4px 8px;
@@ -165,41 +164,28 @@
     .status-danger { color: var(--danger); border-color: #efc1bb; background: #fff7f5; }
     .status-ok { color: var(--ok); border-color: #b9d3c2; background: #f7fbf8; }
     .status-warn { color: var(--warn); border-color: #ecd8a5; background: #fffaf0; }
-    .platform-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0,1fr));
-      gap: 12px;
-    }
-    .mini-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
-      gap: 10px;
-      margin-top: 10px;
-    }
-    .mini {
-      border: 1px solid #ece5d8;
-      border-radius: 10px;
-      padding: 10px;
-      background: #fff;
-    }
-    .alert-grid {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(0,1fr));
-      gap: 12px;
-    }
-    .alert-card {
-      text-align: center;
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px 10px;
-    }
+
+    .platform-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+
+    .mini-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 10px; }
+    .mini { border: 1px solid #ece5d8; border-radius: 10px; padding: 10px; background: #fff; }
+
+    .alert-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
+    .alert-card { text-align: center; background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 16px 10px; }
     .alert-card .n { font-size: 34px; font-weight: 700; line-height: 1; }
-    .hidden { display:none !important; }
+
+    .hidden { display: none !important; }
     .footer-note { margin-top: 12px; font-size: 12px; color: var(--muted); }
+
+    /* 曜日別テーブル */
+    .dow-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    .dow-table th, .dow-table td { padding: 10px 8px; border-top: 1px solid #ece5d8; text-align: right; }
+    .dow-table th:first-child, .dow-table td:first-child { text-align: left; }
+    .dow-highlight { background: #f0f7f2; font-weight: 600; }
+
     @media (max-width: 900px) {
-      .grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
-      .alert-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .alert-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
     @media (max-width: 640px) {
       .wrap { padding: 12px; }
@@ -208,12 +194,13 @@
       .grid, .platform-grid, .alert-grid, .mini-grid { grid-template-columns: 1fr; }
       h1 { font-size: 26px; }
       .value { font-size: 28px; }
-      th:nth-child(3), td:nth-child(3), th:nth-child(4), td:nth-child(4), th:nth-child(5), td:nth-child(5) {
-        display:none;
-      }
+      th:nth-child(3), td:nth-child(3),
+      th:nth-child(4), td:nth-child(4),
+      th:nth-child(5), td:nth-child(5) { display: none; }
     }
   </style>
 </head>
+
 <body>
   <div class="wrap">
     <div class="header">
@@ -231,19 +218,36 @@
     <div class="tabbar">
       <button class="tab active" data-tab="overview">Overview</button>
       <button class="tab" data-tab="platforms">Platforms</button>
+      <button class="tab" data-tab="weekly">曜日分析</button>
       <button class="tab" data-tab="alerts">Alerts</button>
     </div>
 
     <div class="banner" id="dependencyBanner"></div>
-
     <div id="errorBox" class="section hidden"></div>
 
+    <!-- Overview -->
     <section id="overview" class="tabview">
       <div class="grid">
-        <div class="card"><div class="label">売上</div><div class="value" id="grossTotal">-</div><div class="meta">gross_total</div></div>
-        <div class="card"><div class="label">手数料</div><div class="value danger" id="feeTotal">-</div><div class="meta">fee_total</div></div>
-        <div class="card"><div class="label">利益</div><div class="value ok" id="netTotal">-</div><div class="meta">net_total</div></div>
-        <div class="card"><div class="label">注文数</div><div class="value" id="orderCount">-</div><div class="meta" id="orderMeta">-</div></div>
+        <div class="card">
+          <div class="label">売上</div>
+          <div class="value" id="grossTotal">-</div>
+          <div class="meta">gross_total</div>
+        </div>
+        <div class="card">
+          <div class="label">手数料</div>
+          <div class="value danger" id="feeTotal">-</div>
+          <div class="meta">fee_total</div>
+        </div>
+        <div class="card">
+          <div class="label">利益</div>
+          <div class="value ok" id="netTotal">-</div>
+          <div class="meta">net_total</div>
+        </div>
+        <div class="card">
+          <div class="label">注文数</div>
+          <div class="value" id="orderCount">-</div>
+          <div class="meta" id="orderMeta">-</div>
+        </div>
       </div>
 
       <div class="section">
@@ -263,12 +267,7 @@
         <table>
           <thead>
             <tr>
-              <th>商品</th>
-              <th>数量</th>
-              <th>売上</th>
-              <th>手数料</th>
-              <th>利益</th>
-              <th>状態</th>
+              <th>商品</th><th>数量</th><th>売上</th><th>手数料</th><th>利益</th><th>状態</th>
             </tr>
           </thead>
           <tbody id="ordersBody"></tbody>
@@ -277,10 +276,25 @@
       </div>
     </section>
 
+    <!-- Platforms -->
     <section id="platforms" class="tabview hidden">
       <div class="platform-grid" id="platformGrid"></div>
+      <div id="dailyGrid" style="margin-top:24px;"></div>
     </section>
 
+    <!-- 曜日分析 -->
+    <section id="weekly" class="tabview hidden">
+      <div class="section">
+        <h2>曜日別 平均売上</h2>
+        <div id="dowTable"></div>
+      </div>
+      <div class="section" style="margin-top:18px;">
+        <h2>AOV（客単価）by platform</h2>
+        <div id="aovTable"></div>
+      </div>
+    </section>
+
+    <!-- Alerts -->
     <section id="alerts" class="tabview hidden">
       <div class="alert-grid" id="alertGrid"></div>
       <div class="section" style="margin-top:14px;">
@@ -297,7 +311,9 @@
   </div>
 
   <script>
-    const DATA_URL = 'https://sundubu-ai-context.vercel.app/data/delivery_orders.json';
+    const DATA_URL = "https://sundubu-ai-context.vercel.app/data/delivery_orders.json";
+
+    const DOW = ['日', '月', '火', '水', '木', '金', '土'];
 
     document.getElementById('reloadBtn').addEventListener('click', loadData);
     document.getElementById('rawBtn').addEventListener('click', () => window.open(DATA_URL, '_blank'));
@@ -311,19 +327,12 @@
       });
     });
 
-    function yen(v) {
-      return '¥' + Number(v || 0).toLocaleString('ja-JP');
-    }
-    function pct(v) {
-      return Math.round((Number(v || 0)) * 1000) / 10 + '%';
-    }
+    function yen(v) { return '¥' + Number(v || 0).toLocaleString('ja-JP'); }
+    function pct(v) { return Math.round((Number(v || 0)) * 1000) / 10 + '%'; }
     function esc(s) {
       return String(s ?? '')
-        .replaceAll('&', '&amp;')
-        .replaceAll('<', '&lt;')
-        .replaceAll('>', '&gt;')
-        .replaceAll('"', '&quot;')
-        .replaceAll("'", '&#039;');
+        .replaceAll('&', '&amp;').replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#039;');
     }
     function statusPill(order) {
       const status = (order.status || 'ok').toLowerCase();
@@ -334,22 +343,42 @@
     }
 
     function normalize(data) {
-      const orders = Array.isArray(data.orders) ? data.orders : [];
+      const isWeekly = Array.isArray(data.records);
+      const records = isWeekly ? data.records : [];
+      const orders = isWeekly ? [] : Array.isArray(data.orders) ? data.orders : [];
       const k = data.kpi || {};
-      const gross = Number(k.gross_total ?? 0);
-      const fee = Number(k.fee_total ?? 0);
-      const net = Number(k.net_total ?? 0);
-      const orderCount = Number(k.order_count ?? orders.length ?? 0);
-      const itemQty = Number(k.item_qty_total ?? orders.reduce((a,o)=>a+Number(o.qty||0),0));
-      const feeRate = Number(k.fee_rate ?? (gross ? fee / gross : 0));
 
+      const gross = isWeekly
+        ? records.reduce((a, r) => a + Number(r.sales || 0), 0)
+        : Number(k.gross_total ?? 0);
+      const fee = isWeekly
+        ? records.reduce((a, r) => a + Number(r.fee || 0), 0)
+        : Number(k.fee_total ?? 0);
+      const net = gross - fee;
+      const orderCount = isWeekly
+        ? records.reduce((a, r) => a + Number(r.orders || 0), 0)
+        : Number(k.order_count ?? orders.length ?? 0);
+      const itemQty = isWeekly ? 0 : Number(k.item_qty_total ?? orders.reduce((a, o) => a + Number(o.qty || 0), 0));
+      const feeRate = gross ? fee / gross : 0;
+
+      // platform集計
       const grouped = {};
+      if (isWeekly) {
+        records.forEach(r => {
+          const p = (r.platform || 'unknown').toLowerCase();
+          if (!grouped[p]) grouped[p] = { platform: p, gross: 0, fee: 0, net: 0, orders: 0, items: 0, cancelled: 0, delayed: 0, pending: 0 };
+          grouped[p].gross += Number(r.sales || 0);
+          grouped[p].fee += Number(r.fee || 0);
+          grouped[p].net = grouped[p].gross - grouped[p].fee;
+          grouped[p].orders += Number(r.orders || 0);
+        });
+      }
       orders.forEach(o => {
         const p = (o.platform || data.platform || 'unknown').toLowerCase();
         if (!grouped[p]) grouped[p] = { platform: p, gross: 0, fee: 0, net: 0, orders: 0, items: 0, cancelled: 0, delayed: 0, pending: 0 };
         grouped[p].gross += Number(o.gross || 0);
         grouped[p].fee += Number(o.total_fees ?? o.fee ?? 0);
-        grouped[p].net += Number(o.net ?? (Number(o.gross||0) - Number(o.total_fees ?? o.fee ?? 0)));
+        grouped[p].net += Number(o.gross || 0) - Number(o.total_fees ?? o.fee ?? 0);
         grouped[p].orders += 1;
         grouped[p].items += Number(o.qty || 0);
         if (o.cancel_flag || String(o.status || '').toLowerCase().includes('cancel')) grouped[p].cancelled += 1;
@@ -362,18 +391,47 @@
         cancel_rate: p.orders ? p.cancelled / p.orders : 0,
         delay_rate: p.orders ? p.delayed / p.orders : 0,
         dependency: gross ? p.gross / gross : 0,
+        aov: p.orders ? Math.round(p.gross / p.orders) : 0,  // ← AOV追加
       }));
+
+      // 日別集計
+      const byDate = {};
+      if (isWeekly) {
+        records.forEach(r => {
+          if (!byDate[r.date]) byDate[r.date] = [];
+          byDate[r.date].push(r);
+        });
+      }
+
+      // 曜日別集計
+      const byDow = {}; // { 0:{sales,fee,net,orders,days}, ... }
+      Object.entries(byDate).forEach(([dateStr, rows]) => {
+        const dow = new Date(dateStr).getDay();
+        if (!byDow[dow]) byDow[dow] = { sales: 0, fee: 0, net: 0, orders: 0, days: 0 };
+        const daySales = rows.reduce((a, r) => a + Number(r.sales || 0), 0);
+        const dayFee   = rows.reduce((a, r) => a + Number(r.fee || 0), 0);
+        const dayOrders = rows.reduce((a, r) => a + Number(r.orders || 0), 0);
+        byDow[dow].sales  += daySales;
+        byDow[dow].fee    += dayFee;
+        byDow[dow].net    += daySales - dayFee;
+        byDow[dow].orders += dayOrders;
+        byDow[dow].days   += 1;
+      });
 
       const alerts = {
         reconciled: orders.filter(o => o._reconciled === true).length,
-        cancelled: orders.filter(o => o.cancel_flag || String(o.status||'').toLowerCase().includes('cancel')).length,
-        delayed: orders.filter(o => o.delay_flag || String(o.status||'').toLowerCase().includes('delay')).length,
-        pending: orders.filter(o => String(o.status||'').toLowerCase().includes('pending')).length,
+        cancelled: orders.filter(o => o.cancel_flag || String(o.status || '').toLowerCase().includes('cancel')).length,
+        delayed: orders.filter(o => o.delay_flag || String(o.status || '').toLowerCase().includes('delay')).length,
+        pending: orders.filter(o => String(o.status || '').toLowerCase().includes('pending')).length,
         fee_mismatch: orders.filter(o => Number(o.other_fee || 0) >= 2).length,
       };
+      const topDependency = platforms.slice().sort((a, b) => b.dependency - a.dependency)[0];
 
-      const topDependency = platforms.slice().sort((a,b)=>b.dependency-a.dependency)[0];
-      return { orders, gross, fee, net, orderCount, itemQty, feeRate, platforms, alerts, topDependency, raw: data };
+      // 最新日（当日判定用）
+      const latestDate = Object.keys(byDate).sort().reverse()[0] || null;
+      const latestDow = latestDate ? new Date(latestDate).getDay() : null;
+
+      return { orders, gross, fee, net, orderCount, itemQty, feeRate, platforms, alerts, topDependency, raw: data, byDate, byDow, latestDate, latestDow };
     }
 
     function renderOverview(m) {
@@ -389,18 +447,18 @@
       document.getElementById('feeBar').style.width = feePct + '%';
       document.getElementById('netBar').textContent = netPct > 12 ? `利益 ${yen(m.net)}` : '';
       document.getElementById('feeBar').textContent = feePct > 12 ? `手数料 ${yen(m.fee)}` : '';
-      document.getElementById('netLegend').textContent = `利益 ${pct(netPct/100)}`;
-      document.getElementById('feeLegend').textContent = `手数料 ${pct(feePct/100)}`;
+      document.getElementById('netLegend').textContent = `利益 ${pct(netPct / 100)}`;
+      document.getElementById('feeLegend').textContent = `手数料 ${pct(feePct / 100)}`;
 
       const body = document.getElementById('ordersBody');
       body.innerHTML = '';
       m.orders.forEach(o => {
         const tr = document.createElement('tr');
         const fee = Number(o.total_fees ?? o.fee ?? 0);
-        const net = Number(o.net ?? (Number(o.gross||0) - fee));
+        const net = Number(o.gross || 0) - fee;
         tr.innerHTML = `
           <td>${esc(o.product_name || o.item_name || '-')}</td>
-          <td>${Number(o.qty||0)}</td>
+          <td>${Number(o.qty || 0)}</td>
           <td>${yen(o.gross)}</td>
           <td class="danger">${yen(fee)}</td>
           <td class="ok">${yen(net)}</td>
@@ -408,6 +466,50 @@
         `;
         body.appendChild(tr);
       });
+    }
+
+    function renderDaily(m) {
+      const el = document.getElementById('dailyGrid');
+      if (!m.byDate || Object.keys(m.byDate).length === 0) { el.innerHTML = ''; return; }
+
+      const dates = Object.keys(m.byDate).sort().reverse();
+      const fmt = v => v === null ? '' : (v >= 0
+        ? `<span style="color:#2a7a4b;font-size:12px;"> +${yen(v)}↑</span>`
+        : `<span style="color:#c0392b;font-size:12px;"> ${yen(v)}↓</span>`);
+
+      el.innerHTML = '<h2 style="margin-bottom:12px;">日別集計</h2>' + dates.map((date, i) => {
+        const rows = m.byDate[date];
+        const totalSales = rows.reduce((a, r) => a + Number(r.sales || 0), 0);
+        const totalFee   = rows.reduce((a, r) => a + Number(r.fee || 0), 0);
+        const totalNet   = totalSales - totalFee;
+
+        const prevDate = dates[i + 1];
+        const prevRows = prevDate ? m.byDate[prevDate] : null;
+        const prevSales = prevRows ? prevRows.reduce((a, r) => a + Number(r.sales || 0), 0) : null;
+        const prevNet   = prevRows ? prevRows.reduce((a, r) => a + (Number(r.sales) - Number(r.fee)), 0) : null;
+        const diffSales = prevSales !== null ? totalSales - prevSales : null;
+        const diffNet   = prevNet   !== null ? totalNet   - prevNet   : null;
+
+        const platformRows = rows.map(r =>
+          `<div style="display:flex;gap:16px;padding:4px 0;font-size:13px;color:#666;">
+            <span style="width:100px;">${r.platform.toUpperCase()}</span>
+            <span>売上 ${yen(r.sales)}</span>
+            <span>手数料 ${yen(r.fee)}</span>
+            <span>利益 ${yen(r.sales - r.fee)}</span>
+          </div>`
+        ).join('');
+
+        return `<div class="section" style="margin-bottom:12px;">
+          <div style="font-weight:600;margin-bottom:8px;">${date}</div>
+          ${platformRows}
+          <div style="display:flex;gap:16px;padding:6px 0 0;font-size:13px;border-top:1px solid #eee;margin-top:4px;">
+            <span style="width:100px;font-weight:600;">合計</span>
+            <span>売上 ${yen(totalSales)}${fmt(diffSales)}</span>
+            <span>手数料 ${yen(totalFee)}</span>
+            <span>利益 ${yen(totalNet)}${fmt(diffNet)}</span>
+          </div>
+        </div>`;
+      }).join('');
     }
 
     function renderPlatforms(m) {
@@ -431,12 +533,82 @@
           </div>
           <div class="mini-grid">
             <div class="mini"><div class="label">手数料率</div><div class="value small ${feeCls}">${pct(p.fee_rate)}</div></div>
-            <div class="mini"><div class="label">cancel率</div><div class="value small ${p.cancel_rate > 0.1 ? 'danger' : ''}">${pct(p.cancel_rate)}</div></div>
+            <div class="mini"><div class="label">AOV</div><div class="value small">${yen(p.aov)}</div></div>
             <div class="mini"><div class="label">依存率</div><div class="value small ${depCls}">${pct(p.dependency)}</div></div>
           </div>
         `;
         grid.appendChild(card);
       });
+    }
+
+    function renderWeekly(m) {
+      // 曜日別平均テーブル
+      const dowEl = document.getElementById('dowTable');
+      const dowKeys = Object.keys(m.byDow).map(Number).sort((a, b) => a - b);
+
+      if (dowKeys.length === 0) {
+        dowEl.innerHTML = '<div style="color:var(--muted);font-size:14px;">曜日データなし</div>';
+      } else {
+        const headerCols = dowKeys.map(d => {
+          const isToday = d === m.latestDow;
+          return `<th${isToday ? ' class="dow-highlight"' : ''}>${DOW[d]}${isToday ? '（直近）' : ''}</th>`;
+        }).join('');
+
+        const makeTr = (label, fn, cls = '') => {
+          const cols = dowKeys.map(d => {
+            const row = m.byDow[d];
+            const isToday = d === m.latestDow;
+            return `<td${isToday ? ' class="dow-highlight"' : ''}${cls ? ` style="color:${cls}"` : ''}>${fn(row)}</td>`;
+          }).join('');
+          return `<tr><th>${label}</th>${cols}</tr>`;
+        };
+
+        dowEl.innerHTML = `
+          <table class="dow-table">
+            <thead><tr><th></th>${headerCols}</tr></thead>
+            <tbody>
+              ${makeTr('平均売上', r => yen(Math.round(r.sales / r.days)))}
+              ${makeTr('平均利益', r => yen(Math.round(r.net / r.days)), 'var(--ok)')}
+              ${makeTr('平均注文数', r => Math.round(r.orders / r.days) + '件')}
+              ${makeTr('サンプル数', r => r.days + '日分')}
+            </tbody>
+          </table>
+        `;
+      }
+
+      // AOVテーブル（platform別）
+      const aovEl = document.getElementById('aovTable');
+      if (!m.platforms.length) {
+        aovEl.innerHTML = '<div style="color:var(--muted);font-size:14px;">データなし</div>';
+        return;
+      }
+
+      const rows = m.platforms.map(p => {
+        const aovCls = p.aov < 2500 ? 'color:var(--danger)' : 'color:var(--ok)';
+        return `<tr>
+          <td>${p.platform.toUpperCase()}</td>
+          <td style="text-align:right;">${p.orders}件</td>
+          <td style="text-align:right;">${yen(p.gross)}</td>
+          <td style="text-align:right;${aovCls};font-weight:600;">${yen(p.aov)}</td>
+          <td style="text-align:right;">${pct(p.fee_rate)}</td>
+        </tr>`;
+      }).join('');
+
+      aovEl.innerHTML = `
+        <table>
+          <thead>
+            <tr>
+              <th>Platform</th>
+              <th style="text-align:right;">注文数</th>
+              <th style="text-align:right;">売上合計</th>
+              <th style="text-align:right;">AOV（客単価）</th>
+              <th style="text-align:right;">手数料率</th>
+            </tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>
+        <div class="footer-note">AOV = 売上 ÷ 注文数。¥2,500未満を赤表示。</div>
+      `;
     }
 
     function renderAlerts(m) {
@@ -476,6 +648,8 @@
         const model = normalize(data);
         renderOverview(model);
         renderPlatforms(model);
+        renderDaily(model);
+        renderWeekly(model);
         renderAlerts(model);
         document.getElementById('updatedAt').textContent = `更新: ${new Date().toLocaleString('ja-JP')}`;
       } catch (e) {
