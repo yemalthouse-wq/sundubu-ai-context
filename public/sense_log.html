@@ -378,11 +378,11 @@
     saveLocal(entry);
 
     // GAS送信（no-cors）
-    fetch("https://script.google.com/macros/s/AKfycbwIPvkNwoKo2Y_bMvTjNEbJS0u60SYRJ_M9XZ5JLX3YzFEOIXmKnzjB0Rbj3qioasCFjmg/exec", {
-  method: 'POST',
-  mode: 'no-cors',
+    fetch("https://script.google.com/macros/s/AKfycbwIPvkNwoKo2Y_bMvTjNEbJSOu60SYRJ_M9XZ5JLX3YzFEOIXmKnzjB0Rbj3qioasCFjmg/exec", {
+  method: "POST",
+  mode: "no-cors",
   headers: {
-    'Content-Type': 'application/json'
+    "Content-Type": "application/json"
   },
   body: JSON.stringify(entry)
 });
