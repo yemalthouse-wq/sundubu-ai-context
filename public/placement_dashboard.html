@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>配置ダッシュボード</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #f7f6f3;
+      --surface: #fff;
+      --text: #1a1a1a;
+      --sub: #888;
+      --border: #e5e3de;
+      --ok: #2c7a4b;
+      --warn: #c0392b;
+      --accent: #2c4a7c;
+      --radius: 12px;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: var(--bg);
+      padding: 16px;
+      min-height: 100dvh;
+    }
+
+    h1 {
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .updated {
+      font-size: 11px;
+      color: var(--sub);
+      margin-bottom: 20px;
+    }
+
+    /* セクション */
+    .sec { margin-bottom: 20px; }
+
+    .sec-label {
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      color: var(--sub);
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    /* サマリーグリッド */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .summary-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 14px 12px;
+      text-align: center;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+
+    .summary-num {
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .summary-label {
+      font-size: 11px;
+      color: var(--sub);
+    }
+
+    .num-run     { color: var(--accent); }
+    .num-connect { color: var(--ok); }
+    .num-think   { color: #7a5c2c; }
+    .num-change  { color: var(--warn); }
+    .num-total   { color: var(--text); }
+
+    /* change率カード */
+    .rate-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+
+    .rate-num {
+      font-size: 44px;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--warn);
+      flex-shrink: 0;
+    }
+
+    .rate-desc {
+      font-size: 13px;
+      color: var(--sub);
+      line-height: 1.6;
+    }
+
+    /* バー */
+    .bar-wrap { margin-top: 8px; }
+    .bar {
+      height: 6px;
+      background: #e5e3de;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%;
+      background: var(--warn);
+      border-radius: 99px;
+      transition: width 0.6s ease;
+    }
+
+    /* 配置ミスフラグ */
+    .flag-list { display: flex; flex-direction: column; gap: 8px; }
+
+    .flag-item {
+      background: #fff7f5;
+      border: 1px solid #efc1bb;
+      border-radius: var(--radius);
+      padding: 12px 14px;
+    }
+
+    .flag-name {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--warn);
+      margin-bottom: 4px;
+    }
+
+    .flag-detail {
+      font-size: 12px;
+      color: #666;
+    }
+
+    .flag-empty {
+      background: #f7fbf8;
+      border: 1px solid #b9d3c2;
+      border-radius: var(--radius);
+      padding: 12px 14px;
+      font-size: 13px;
+      color: var(--ok);
+      text-align: center;
+    }
+
+    /* changeログ一覧 */
+    .log-list { display: flex; flex-direction: column; gap: 8px; }
+
+    .log-item {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 12px 14px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+
+    .log-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .log-date { font-size: 11px; color: var(--sub); }
+    .log-name { font-size: 13px; font-weight: 500; color: var(--text); }
+
+    .log-arrow {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+
+    .role-tag {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+
+    .role-run     { background: #eef2fb; color: var(--accent); }
+    .role-connect { background: #eef7f2; color: var(--ok); }
+    .role-think   { background: #fdf5e8; color: #7a5c2c; }
+
+    .arrow-icon { font-size: 12px; color: var(--warn); }
+
+    .log-memo {
+      font-size: 12px;
+      color: var(--sub);
+      font-weight: 300;
+    }
+
+    /* ロード */
+    .loading {
+      text-align: center;
+      padding: 40px 0;
+      font-size: 13px;
+      color: var(--sub);
+    }
+
+    .error-msg {
+      background: #fff7f5;
+      border: 1px solid #efc1bb;
+      border-radius: var(--radius);
+      padding: 12px;
+      font-size: 13px;
+      color: var(--warn);
+    }
+  </style>
+</head>
+<body>
+
+<h1>配置ダッシュボード</h1>
+<div class="updated" id="updatedAt">読み込み中…</div>
+
+<div id="content">
+  <div class="loading">データを取得中…</div>
+</div>
+
+<script>
+  // GASのgetエンドポイント（doGet実装が必要）
+  const GAS_URL = 'https://script.google.com/macros/s/AKfycbw1PvkNwoKo2Y_bMvTjNEbJS0u60SYRJM9XZ5JLX3YzFEO1XmKnzjB0Rbj3qioasCFjmg/exec';
+
+  const ROLE_JP = { run: '回す', connect: '繋ぐ', think: '考える' };
+
+  async function loadData() {
+    try {
+      const res = await fetch(`${GAS_URL}?action=getLog`, { cache: 'no-store' });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      render(data);
+      document.getElementById('updatedAt').textContent =
+        `更新: ${new Date().toLocaleString('ja-JP')}`;
+    } catch (e) {
+      document.getElementById('content').innerHTML =
+        `<div class="error-msg">データ取得失敗: ${e.message}<br><br>
+        GASにdoGet（getLog）の実装が必要です。<br>
+        またはローカルモード（サンプルデータ）で表示します。</div>`;
+      // サンプルデータでデモ表示
+      renderSample();
+    }
+  }
+
+  function renderSample() {
+    const sample = [
+      { date: '2026-04-14', name: 'りゅうせい', current_role: 'run', decision: 'keep', next_role: '', memo: '実装配置で詰まりなし' },
+      { date: '2026-04-13', name: '豊田',       current_role: 'connect', decision: 'change', next_role: 'run', memo: '接客で2回詰まった' },
+      { date: '2026-04-12', name: '中谷',       current_role: 'run', decision: 'keep', next_role: '', memo: '仕込み安定' },
+      { date: '2026-04-11', name: '豊田',       current_role: 'connect', decision: 'change', next_role: 'run', memo: '判断場面で止まった' },
+      { date: '2026-04-10', name: 'りゅうせい', current_role: 'run', decision: 'keep', next_role: '', memo: 'CSV処理問題なし' },
+    ];
+    render(sample);
+    document.getElementById('updatedAt').textContent = 'サンプルデータ表示中';
+  }
+
+  function render(logs) {
+    // 集計
+    const total = logs.length;
+    const roleCounts = { run: 0, connect: 0, think: 0 };
+    const changeCount = logs.filter(l => l.decision === 'change').length;
+    logs.forEach(l => { if (roleCounts[l.current_role] !== undefined) roleCounts[l.current_role]++; });
+    const changeRate = total > 0 ? Math.round(changeCount / total * 100) : 0;
+
+    // 配置ミス検知（同一人物×同一role×change 2回以上）
+    const flagMap = {};
+    logs.filter(l => l.decision === 'change').forEach(l => {
+      const key = `${l.name}__${l.current_role}`;
+      flagMap[key] = (flagMap[key] || 0) + 1;
+    });
+    const flags = Object.entries(flagMap)
+      .filter(([, count]) => count >= 2)
+      .map(([key, count]) => {
+        const [name, role] = key.split('__');
+        return { name, role, count };
+      });
+
+    // changeログ（最新順）
+    const changeLogs = logs.filter(l => l.decision === 'change')
+      .sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    document.getElementById('content').innerHTML = `
+
+      <!-- role別カウント -->
+      <div class="sec">
+        <div class="sec-label">ROLE COUNT</div>
+        <div class="summary-grid">
+          <div class="summary-card">
+            <div class="summary-num num-run">${roleCounts.run}</div>
+            <div class="summary-label">回す</div>
+          </div>
+          <div class="summary-card">
+            <div class="summary-num num-connect">${roleCounts.connect}</div>
+            <div class="summary-label">繋ぐ</div>
+          </div>
+          <div class="summary-card">
+            <div class="summary-num num-think">${roleCounts.think}</div>
+            <div class="summary-label">考える</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- change率 -->
+      <div class="sec">
+        <div class="sec-label">CHANGE RATE</div>
+        <div class="rate-card">
+          <div class="rate-num">${changeRate}%</div>
+          <div>
+            <div class="rate-desc">
+              ${changeCount}件 / ${total}件が要変更<br>
+              <span style="color:var(--text);font-weight:500;">${total - changeCount}件</span> 維持
+            </div>
+            <div class="bar-wrap">
+              <div class="bar">
+                <div class="bar-fill" style="width:${changeRate}%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 配置ミスフラグ -->
+      <div class="sec">
+        <div class="sec-label">配置ミスフラグ</div>
+        <div class="flag-list">
+          ${flags.length === 0
+            ? '<div class="flag-empty">配置ミス検知なし</div>'
+            : flags.map(f => `
+              <div class="flag-item">
+                <div class="flag-name">⚠ ${f.name}（${ROLE_JP[f.role] || f.role}）</div>
+                <div class="flag-detail">同一役割でchange ${f.count}回 → 配置見直し推奨</div>
+              </div>`).join('')
+          }
+        </div>
+      </div>
+
+      <!-- changeログ一覧 -->
+      <div class="sec">
+        <div class="sec-label">CHANGE LOG</div>
+        <div class="log-list">
+          ${changeLogs.length === 0
+            ? '<div style="font-size:13px;color:var(--sub);padding:12px 0;">changeログなし</div>'
+            : changeLogs.map(l => `
+              <div class="log-item">
+                <div class="log-header">
+                  <span class="log-date">${l.date}</span>
+                  <span class="log-name">${l.name || '—'}</span>
+                </div>
+                <div class="log-arrow">
+                  <span class="role-tag role-${l.current_role}">${ROLE_JP[l.current_role] || l.current_role}</span>
+                  <span class="arrow-icon">→</span>
+                  <span class="role-tag role-${l.next_role}">${ROLE_JP[l.next_role] || l.next_role || '—'}</span>
+                </div>
+                <div class="log-memo">${l.memo || ''}</div>
+              </div>`).join('')
+          }
+        </div>
+      </div>
+    `;
+  }
+
+  loadData();
+</script>
+</body>
+</html>
