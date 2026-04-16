@@ -377,15 +377,14 @@
     // localStorage保存
     saveLocal(entry);
 
-// GAS送信（デバッグモード）
+// GAS送信（no-cors）
+const form = new FormData();
+form.append('data', JSON.stringify(entry));
 fetch("https://script.google.com/macros/s/AKfycbwIPvkNwoKo2Y_bMvTjNEbJS0u60SYRJM9XZ5JLX3YzFEOIXmKnzjBORbj3qioasCFjmg/exec", {
   method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify(entry)
-})
-.then(res => console.log('GAS status:', res.status))
-.catch(e => console.error('GAS error:', e));
-
+  mode: "no-cors",
+  body: form
+});
 
     // リセット
     document.getElementById('insight').value = '';
