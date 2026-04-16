@@ -377,17 +377,15 @@
     // localStorage保存
     saveLocal(entry);
 
-    // GAS送信（no-cors）
- try {
-  fetch("https://script.google.com/macros/s/AKfycbwIPvkNwoKo2Y_bMvTjNEbJS0u60SYRJM9XZ5JLX3YzFEOIXmKnzjBORbj3qioasCFjmg/exec", {
-    method: "POST",
-    mode: "no-cors",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(entry)
-  });
-} catch (e) {
-  console.error('GAS送信エラー:', e);
-}
+// GAS送信（デバッグモード）
+fetch("https://script.google.com/macros/s/AKfycbwIPvkNwoKo2Y_bMvTjNEbJS0u60SYRJM9XZ5JLX3YzFEOIXmKnzjBORbj3qioasCFjmg/exec", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(entry)
+})
+.then(res => console.log('GAS status:', res.status))
+.catch(e => console.error('GAS error:', e));
+
 
     // リセット
     document.getElementById('insight').value = '';
