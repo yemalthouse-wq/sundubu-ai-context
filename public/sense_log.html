@@ -382,7 +382,6 @@ const form = new FormData();
 form.append('data', JSON.stringify(entry));
 fetch("https://script.google.com/macros/s/AKfycbwIPvkNwoKo2Y_bMvTjNEbJS0u60SYRJM9XZ5JLX3YzFEOIXmKnzjBORbj3qioasCFjmg/exec", {
   method: "POST",
-  mode: "no-cors",
   body: form
 });
 
