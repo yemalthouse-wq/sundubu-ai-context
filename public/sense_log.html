@@ -380,8 +380,7 @@
 // GAS送信（no-cors）
 const form = new FormData();
 form.append('data', JSON.stringify(entry));
-fetch("https://script.google.com/macros/s/AKfycbyOaKwqxby6LxDd0ziK8xsBIoHAs0jYhstq-KmarkeW6EEefWTbMJx9AJpMqGwqbA2Srg/exec
-", {
+fetch("https://script.google.com/macros/s/AKfycbyOaKwqxby6LxDd0ziK8xsBIoHAs0jYhstq-KmarkeW6EEefWTbMJx9AJpMqGwqbA2Srg/exec", {
   method: "POST",
   body: form
 });
