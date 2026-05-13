@@ -72,3 +72,27 @@ Normalized delivery order data from Uber / RocketNow.
     "net": 1924
   }
 ]
+```
+
+## Phase 1.8 Public Contract (consumer-locked, list-root)
+
+```yaml
+delivery_orders_public_contract:
+  root: list[dict]
+
+required_keys:
+  - timestamp
+  - revenue
+  - effective_profit
+
+timestamp:
+  format: ISO8601 UTC aware
+  naive: forbidden
+
+note:
+  synthetic_timestamp_possible:
+    description: |
+      Some producer pipelines may emit synthetic timestamps
+      for contract normalization only.
+      Synthetic timestamps MUST NOT be interpreted as real event times.
+```

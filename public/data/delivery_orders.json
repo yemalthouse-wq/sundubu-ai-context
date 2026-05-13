@@ -1,13 +1,128 @@
-{
-  "date": "2026-03-19",
-  "platform": "uber",
-  "orders": [
-    {
-      "item_name": "スンドゥブ",
-      "qty": 3,
-      "gross": 2700,
-      "fee": 810,
-      "delay_flag": false
-    }
-  ]
-}
+[
+  {
+    "timestamp": "2026-03-21T00:00:00+00:00",
+    "platform": "uber",
+    "store": "nakameguro",
+    "orders": 11,
+    "revenue": 29700,
+    "fee": 10395,
+    "effective_profit": 19305
+  },
+  {
+    "timestamp": "2026-03-21T00:00:00+00:00",
+    "platform": "rocketnow",
+    "store": "nakameguro",
+    "orders": 4,
+    "revenue": 9200,
+    "fee": 2530,
+    "effective_profit": 6670
+  },
+  {
+    "timestamp": "2026-03-22T00:00:00+00:00",
+    "platform": "uber",
+    "store": "nakameguro",
+    "orders": 8,
+    "revenue": 21600,
+    "fee": 7560,
+    "effective_profit": 14040
+  },
+  {
+    "timestamp": "2026-03-22T00:00:00+00:00",
+    "platform": "rocketnow",
+    "store": "nakameguro",
+    "orders": 6,
+    "revenue": 13800,
+    "fee": 3795,
+    "effective_profit": 10005
+  },
+  {
+    "timestamp": "2026-03-23T00:00:00+00:00",
+    "platform": "uber",
+    "store": "nakameguro",
+    "orders": 14,
+    "revenue": 37800,
+    "fee": 13230,
+    "effective_profit": 24570
+  },
+  {
+    "timestamp": "2026-03-23T00:00:00+00:00",
+    "platform": "rocketnow",
+    "store": "nakameguro",
+    "orders": 5,
+    "revenue": 11500,
+    "fee": 3162,
+    "effective_profit": 8338
+  },
+  {
+    "timestamp": "2026-03-24T00:00:00+00:00",
+    "platform": "uber",
+    "store": "nakameguro",
+    "orders": 17,
+    "revenue": 45900,
+    "fee": 16065,
+    "effective_profit": 29835
+  },
+  {
+    "timestamp": "2026-03-24T00:00:00+00:00",
+    "platform": "rocketnow",
+    "store": "nakameguro",
+    "orders": 7,
+    "revenue": 16100,
+    "fee": 4427,
+    "effective_profit": 11673
+  },
+  {
+    "timestamp": "2026-03-25T00:00:00+00:00",
+    "platform": "uber",
+    "store": "nakameguro",
+    "orders": 9,
+    "revenue": 24300,
+    "fee": 8505,
+    "effective_profit": 15795
+  },
+  {
+    "timestamp": "2026-03-25T00:00:00+00:00",
+    "platform": "rocketnow",
+    "store": "nakameguro",
+    "orders": 8,
+    "revenue": 18400,
+    "fee": 5060,
+    "effective_profit": 13340
+  },
+  {
+    "timestamp": "2026-03-26T00:00:00+00:00",
+    "platform": "uber",
+    "store": "nakameguro",
+    "orders": 13,
+    "revenue": 35100,
+    "fee": 12285,
+    "effective_profit": 22815
+  },
+  {
+    "timestamp": "2026-03-26T00:00:00+00:00",
+    "platform": "rocketnow",
+    "store": "nakameguro",
+    "orders": 5,
+    "revenue": 11500,
+    "fee": 3162,
+    "effective_profit": 8338
+  },
+  {
+    "timestamp": "2026-03-27T00:00:00+00:00",
+    "platform": "uber",
+    "store": "nakameguro",
+    "orders": 10,
+    "revenue": 27000,
+    "fee": 9450,
+    "effective_profit": 17550
+  },
+  {
+    "timestamp": "2026-03-27T00:00:00+00:00",
+    "platform": "rocketnow",
+    "store": "nakameguro",
+    "orders": 6,
+    "revenue": 13800,
+    "fee": 3795,
+    "effective_profit": 10005
+  }
+]
