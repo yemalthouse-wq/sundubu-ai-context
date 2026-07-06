@@ -1,3 +1,4 @@
 *.dmg
 Downloads/
 public/data/history/
+.DS_Store

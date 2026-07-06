@@ -97,12 +97,14 @@ Replication through
 
 ## Repository Structure
 
+```text
 core/
 cost/
 delivery/
 store/
 market/
 fc/
+```
 
 ---
 
@@ -124,42 +126,57 @@ AI collaborators:
 - ChatGPT
 - Claude
 - Gemini
+
 # Sundubu Tanaka OS
 
 ## Core System
 
+```text
 core/
+```
 ブランド・思想・基本設計
 
 ## Market
 
+```text
 market/
+```
 都市分析・エリア戦略
 
 ## Store Model
 
+```text
 store/
+```
 店舗フォーマット
 厨房仕様
 オペレーション
 
 ## Economics
 
+```text
 cost/
+```
 利益構造
 原価モデル
 
+```text
 fc/
+```
 FC本部設計
 出店アルゴリズム
 ユニットエコノミクス
 
 ## Delivery
 
+```text
 delivery/
+```
 デリバリー戦略
 
 ## Midnight
 
+```text
 midnight/
+```
 夜営業モデル
