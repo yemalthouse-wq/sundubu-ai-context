@@ -122,12 +122,6 @@
 **このログは、OSの前提を固定する。AIはこのログを読めば、前提を忘れない。**
 
 END OF LOG
-heredoc> EOF
-git diff --stat
-git add ...
-git commit ...
-git push ...
-cd /Users/seize/sundubu-ai-context && git pull origin main && cat >> context/decision_log.md << 'EOF'
 
 ---
 
