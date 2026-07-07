@@ -191,3 +191,15 @@ END OF LOG
 - 既存の重複ログ: 掃除は本決定の範囲外
 - 承認: せいさん（2026-07-07） / Execution Thread
 
+
+---
+
+## 2026-07-07: Ye Malthouse 運用正本の一本化 (P3-1)
+
+- 決定: Ye Malthouse の運用判断・ルール・変更管理の正本は `sundubu-ai-context/ye-malthouse/`
+- 理由: Layer 1 宣言（事業管理本部・2事業並列）と整合
+- 修正: the-garage `projects/ye-malthouse/README.md` は正本ポインタへ変更
+- 実コンテンツの移送: 本決定の範囲外（別フェーズ）
+- 観測ケース（ops-log cases + Google Sheet）は継続
+- 承認: せいさん (2026-07-07) / Execution Plan P3-1
+
