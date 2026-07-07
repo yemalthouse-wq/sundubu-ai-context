@@ -122,3 +122,66 @@
 **このログは、OSの前提を固定する。AIはこのログを読めば、前提を忘れない。**
 
 END OF LOG
+heredoc> EOF
+git diff --stat
+git add ...
+git commit ...
+git push ...
+cd /Users/seize/sundubu-ai-context && git pull origin main && cat >> context/decision_log.md << 'EOF'
+
+---
+
+## 2026-07-07：DECISION LOG 再開（P1-3）
+
+本ログは 2026-03-10「END OF LOG」以降も追記を継続する（上記 END OF LOG 表記は歴史的記録として残置し、本宣言が優先する）。
+確定決定は core_rules 第7条に従い本ログに即記録する。
+
+以下5件は 2026-03-10〜2026-07-06 の間、他リポジトリの一次ログにのみ存在した確定決定のバックフィルである（一次記録へのポインタ。全文複製はしない）。
+
+- 承認: せいさん（2026-07-07）
+- 根拠: the-garage `SYSTEM/EXECUTION_PLAN_OPS_LOG_RECOVERY.md` P1-3
+- 転記対象: 確定決定のみ。観測・教訓（D-012/D-013/D-014(6/13)/D-015/D-016(6/16)）は一次ログに留め、本ログには転記しない
+- ID衝突ポリシー（承認済み）: 既存ID（先行使用）を維持し、重複側を next_available_id に再採番する
+
+---
+
+## 2026-04-15：気づきログ基盤を本番導線として正式採用（バックフィル）
+
+- 決定: 気づきログ基盤（sense_log → GAS → OBSERVE_LOG）を本番導線として採用
+- 併記原則: 保存は構造（GAS）・分析は補助・判断は人間
+- 一次記録: ops-log `logs/daily/2026-04-15/log.md`, `logs/daily/2026-04-16/log.md`
+
+---
+
+## 2026-06-18：D-017 Ye Malthouse 観測ケースの配置確定（バックフィル）
+
+- 決定: USE_EXISTING_REPOSITORY — 新規リポジトリを作らず ops-log `cases/ye-malthouse-long-term-reports/` に置く
+- 正本: Google Sheet + 動画アーカイブ（GitHub は要約・判断履歴・効果測定のみ）
+- 一次記録: ops-log `cases/ye-malthouse-long-term-reports/decision-log.md`（D-017）
+
+---
+
+## 2026-06-19：D-018 Future Logic リポジトリの役割確定（バックフィル・ID再採番）
+
+- 決定: the-garage `future-logic/` を prepared_response_accumulation の場として確定（Garage stores: prepared_logic ／ Garage does not: manage active fronts）
+- ID再採番: 一次記録では「D-016」と表記されているが、ops-log 2026-06-16 の D-016（Reality Before Expansion）が先行使用のため、承認済みポリシーにより本決定を D-018 に再採番。一次文書（the-garage `future-logic/DOCTRINE.md`）の表記修正は別タスク
+- 注1: DOCTRINE.md 文書全体は doctrine_candidate のまま。確定したのは「リポジトリの役割」のみ
+- 注2: ops-log `cases/ye-malthouse-long-term-reports/decision-log.md` の空欄テンプレート行に「D-018」が事前記入されているため、同ケースの次の決定は D-019 を使用すること（要・同ファイルの1行修正、別タスク）
+- 一次記録: the-garage `future-logic/DOCTRINE.md`（commit d3261f1, 2026-06-19）
+
+---
+
+## 2026-06-22：D-GARAGE-001 Garage HQ host_os 確定（バックフィル）
+
+- 決定: host_os = Windows + WSL2（旧候補: Ubuntu 直インストール）
+- 分類: plan_change（basis: observed_context_changed）≠ drift
+- 参照 doctrine: reversible_first ／ observed_before_commitment（いずれも candidate 扱い、本ログでは決定のみ記録）
+- 一次記録: ops-log `logs/daily/2026-06-22/log.md` ／ the-garage `logs/ops/2026-06-22/log.md`
+
+---
+
+## 2026-06-22：Phase 1.8 恒久クローズ（バックフィル）
+
+- 決定: Phase 1.8 archive を恒久クローズ（rule: DO_NOT_IMPLEMENT）
+- open_gate: Consumer_Alignment_Verification
+- 一次記録: ops-log `logs/daily/2026-06-22/log.md`
