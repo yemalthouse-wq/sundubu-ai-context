@@ -131,7 +131,7 @@ CodeがそれをpushするのがDecisionです。
 
 ### Codeへの定型指示文
 
-以下のログを3リポジトリにpushして。
+以下のログを ops-log にpushして。
 
 ファイルパス：logs/daily/YYYY-MM-DD/log.md
 既存ファイルは上書き。コンフリクトは--oursで解決。

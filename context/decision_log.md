@@ -179,3 +179,15 @@ END OF LOG
 - 決定: Phase 1.8 archive を恒久クローズ（rule: DO_NOT_IMPLEMENT）
 - open_gate: Consumer_Alignment_Verification
 - 一次記録: ops-log `logs/daily/2026-06-22/log.md`
+
+---
+
+## 2026-07-07: ログ正本先の一本化（P2-1）
+
+- 決定: daily log の push 先を ops-log 1リポジトリへ一本化する
+- 根拠となる既存定義: ops-log `system-map.md`
+- 廃止: 同一ログを sundubu-ai-context / ops-log / the-garage の3リポジトリへ同時pushする doctrine
+- 効果: ログの正本は ops-log のみ。他リポジトリは必要時に参照する
+- 既存の重複ログ: 掃除は本決定の範囲外
+- 承認: せいさん（2026-07-07） / Execution Thread
+
