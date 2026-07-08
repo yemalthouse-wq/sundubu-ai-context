@@ -68,6 +68,8 @@ Layer 2 — タスクに応じて参照
 
 ## リポジトリ構造
 
+**主責務：business_doctrine_root（事業コンテキストの正典）。**
+
 ```
 sundubu-ai-context/
 ├── rules/
@@ -89,8 +91,29 @@ sundubu-ai-context/
 │   └── pilot/shin_maruko/     ← パイロット資料
 ├── core/                      ← スンドゥブ田中家 コア情報
 ├── cost/                      ← 原価・コスト管理
+├── delivery/                  ← デリバリー戦略文書
+├── market/                    ← 市場分析文書
+├── manual/                    ← 運営マニュアル文書
+├── store/                     ← 店舗運営・設計文書
+├── SYSTEM/                    ← 【凍結】歴史的システム索引・テスト記録
+│   ├── THREAD_INDEX.md        ← R-08C により frozen（現状把握に使わない）
+│   └── CODEX/TEST_LOG.md      ← historical test record
+├── vercel.json                ← 【実装同居例外】Vercel deploy config（do not edit）
+├── public/                    ← 【実装同居例外】Vercel出力・UI assets（dashboard html / sense_log.html / public/data）
+├── scripts/                   ← 【実装同居例外・dormant】Phase 1.8 producer / delivery_orders pipeline
+├── data/                      ← 【実装同居例外・dormant】pipeline入力（sample delivery_orders）
 └── ye-malthouse/              ← Ye Malthouse 全般
 ```
+
+### 実装同居例外（R-09B）
+
+`vercel.json` / `public/` / `scripts/` / `data/` は doctrine root の通常責務ではなく、decision_log「2026-07-08：実装同居の例外許容（R-09B）」で許容された **implementation colocation exception**。
+
+- 例外は**現状維持のため**であり、新規実装の許可ではない。**ここで実装を継続しない**
+- doctrine 作業中にこれらの assets を触らない（do not edit / no build / no deploy / no pipeline run）
+- `scripts/` は Phase 1.8 恒久クローズ（DO_NOT_IMPLEMENT）に服する dormant 資産。編集・実行・再開は Consumer_Alignment_Verification gate 通過後のみ
+- `public/sense_log.html` は気づきログ本番導線（2026-04-15 決定）の構成要素の可能性あり。**稼働確認まで不触**
+- 移送判断は Vercel / sense_log.html の稼働実態確認後の **separate future phase**
 
 ---
 
