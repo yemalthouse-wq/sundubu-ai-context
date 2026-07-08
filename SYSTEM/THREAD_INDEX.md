@@ -1,3 +1,7 @@
+> **[FROZEN 2026-07-08]** 本ファイルは凍結（decision_log「2026-07-08：鮮度断層の解消方針 D3」）。以後更新しない。
+> 記載スレッドの多くは他リポジトリ（ops-log / the-garage）系であり、ops-log / the-garage への移送は別フェーズで扱う（今回は残置のみ）。
+> 以下の本文は historical index として残置する。AIはこのファイルを現状把握に使わないこと。
+
 # THREAD_INDEX
 
 Purpose:
