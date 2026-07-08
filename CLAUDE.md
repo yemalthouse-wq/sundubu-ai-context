@@ -68,6 +68,8 @@ Layer 2 — タスクに応じて参照
 
 ## リポジトリ構造
 
+**主責務：business_doctrine_root（事業コンテキストの正典）。**
+
 ```
 sundubu-ai-context/
 ├── rules/
@@ -89,8 +91,29 @@ sundubu-ai-context/
 │   └── pilot/shin_maruko/     ← パイロット資料
 ├── core/                      ← スンドゥブ田中家 コア情報
 ├── cost/                      ← 原価・コスト管理
+├── delivery/                  ← デリバリー戦略文書
+├── market/                    ← 市場分析文書
+├── manual/                    ← 運営マニュアル文書
+├── store/                     ← 店舗運営・設計文書
+├── SYSTEM/                    ← 【凍結】歴史的システム索引・テスト記録
+│   ├── THREAD_INDEX.md        ← R-08C により frozen（現状把握に使わない）
+│   └── CODEX/TEST_LOG.md      ← historical test record
+├── vercel.json                ← 【実装同居例外】Vercel deploy config（do not edit）
+├── public/                    ← 【実装同居例外】Vercel出力・UI assets（dashboard html / sense_log.html / public/data）
+├── scripts/                   ← 【実装同居例外・dormant】Phase 1.8 producer / delivery_orders pipeline
+├── data/                      ← 【実装同居例外・dormant】pipeline入力（sample delivery_orders）
 └── ye-malthouse/              ← Ye Malthouse 全般
 ```
+
+### 実装同居例外（R-09B）
+
+`vercel.json` / `public/` / `scripts/` / `data/` は doctrine root の通常責務ではなく、decision_log「2026-07-08：実装同居の例外許容（R-09B）」で許容された **implementation colocation exception**。
+
+- 例外は**現状維持のため**であり、新規実装の許可ではない。**ここで実装を継続しない**
+- doctrine 作業中にこれらの assets を触らない（do not edit / no build / no deploy / no pipeline run）
+- `scripts/` は Phase 1.8 恒久クローズ（DO_NOT_IMPLEMENT）に服する dormant 資産。編集・実行・再開は Consumer_Alignment_Verification gate 通過後のみ
+- `public/sense_log.html` は気づきログ本番導線（2026-04-15 決定）の構成要素の可能性あり。**稼働確認まで不触**
+- 移送判断は Vercel / sense_log.html の稼働実態確認後の **separate future phase**
 
 ---
 
@@ -142,34 +165,9 @@ CodeがそれをpushするのがDecisionです。
 
 ---
 
-## CURRENT STATE（2026-04-12 更新）
+## CURRENT STATE
 
-### 上目黒物件
-- フェーズ：ハイブリッド戦略（取得6,000万 or 賃貸並行）
-- 判断フレーム：「壊れないか」のみ
-- 目黒信金：✕（保全NG）
-- 城南信金：✕（案件NG・「買うより借りた方がいい」）
-- さわやか信金：条件待ち（主戦場）
-- 藤田（野村不動産）：接触済み・静観中
-- 次の一手：さわやか正式条件確認・藤田から地主温度感待ち
+**現在地の正本は `LATEST.md` に一本化**（decision_log「2026-07-08：鮮度断層の解消方針 D1」）。
 
-### スンドゥブFC
-- フェーズ：鍋エンジンモデル確定・営業未展開
-- 収益モデル：1鍋粗利57%・本部粗利¥2,000/鍋
-- 30店舗時本部利益：約200万円/月
-- 新丸子：面談未実施
-- 営業資料：鍋エンジンモデルへの更新未完了
-- 次の一手：資料更新→新丸子面談
-
-### 評価OS（スタッフ管理）
-- フェーズ：clean再構築中（途中）
-- 構造：raw（不可侵）→clean（再構築中）→drop_log（神聖領域）
-- タイミー：これから本格運用
-- 次の一手：clean1行目完全通過→全行展開
-
-### 三銃士運用
-- ぐぷちゃん：戦略・判断
-- ゲンちゃん：分析・検証
-- クロちゃん（チャット）：ログ生成・構造化
-- クロちゃん（Code）：実装・push
-- ログ：ops-logに毎日push（新フォーマット：What happened/Decisions/Why/Next actions）
+- 本セクションには現場状態を記載しない。旧 CURRENT STATE（2026-04-12 スナップショット）は D1 により撤去済み（履歴は git に残る）
+- LATEST.md の全面再生成は owner の最新状況入力待ち（同 D4）。それまで LATEST 内の現場記述は鮮度に注意して扱うこと

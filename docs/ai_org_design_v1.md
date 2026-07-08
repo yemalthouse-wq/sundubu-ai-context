@@ -49,7 +49,7 @@ sundubu-ai-context/
 ├── DECISION_LOG.md         # 確定事項の記録（変更不可）
 ├── LATEST.md               # 現在地スナップショット
 ├── ROADMAP.md              # Phase 1〜3
-├── AI_WORKFLOW.md          # 三銃士の連携フロー
+├── （AI_WORKFLOW.md は未作成・欠番）# 三銃士の連携フローは CLAUDE.md「AI三銃士」と context/project_context.md「三銃士の役割」に定義
 ├── GLOSSARY.md             # 用語集・定数（ゲンちゃん提案）
 │
 ├── core/                   # スンドゥブ田中家 コア情報
@@ -76,7 +76,7 @@ sundubu-ai-context/
 | `DECISION_LOG.md` | 確定した意思決定の永久記録（上書き禁止） |
 | `LATEST.md` | 今日時点の現在地・残課題・引き継ぎ事項 |
 | `ROADMAP.md` | Phase 1〜3の目標・移行条件・KPI |
-| `AI_WORKFLOW.md` | 三銃士の役割分担と連携フローの詳細 |
+| ~~`AI_WORKFLOW.md`~~ | 未作成・欠番。三銃士の役割分担・連携フローは `CLAUDE.md`「AI三銃士」・`context/project_context.md`「三銃士の役割」が正（2026-07-08 R-07） |
 | `GLOSSARY.md` | 事業用語の定義と計算に使う定数 |
 | `fc/fc_constitution.md` | FCモデルの最上位規約（10条） |
 | `fc/org/org_chart.md` | 12部署の一覧と担当AI |
