@@ -251,3 +251,38 @@ END OF LOG
 - GLOSSARY / business_models / LATEST / fc_constitution への downstream propagation は本決定の範囲外（Recovery Execution 次ステップで実施）
 - 承認: せいさん（2026-07-08）/ Recovery Execution D候補1（R-01/R-02）
 
+---
+
+## 2026-07-08：鮮度断層の解消方針 D1〜D4（R-08B）
+
+R-08A Freshness Review（2026-07-08 実施。現在地を名乗るファイルが4枚存在し、それぞれ 2026-03-10 / 04-12 / 03-10 / 03-10 で凍結していた断層の整理）を根拠とする owner 裁定。
+
+### D1：現在地正本の一本化
+
+- **現在地の正本は LATEST.md に一本化する**
+- CLAUDE.md の CURRENT STATE は、今後 LATEST.md 参照ポインタへ縮退する
+- 理由: CLAUDE.md 自身が Layer 1 に LATEST を指定しており、現在地正本の二重化を解消するため
+
+### D2：current_focus.md の廃止凍結
+
+- context/current_focus.md は**廃止宣言ヘッダ付きで凍結**する（削除はしない）
+- 週次運用は再開しない
+- 今後の focus / next action は LATEST.md に吸収する
+
+### D3：THREAD_INDEX の凍結残置
+
+- SYSTEM/THREAD_INDEX.md は**凍結ヘッダ付きで残置**する
+- ops-log / the-garage への移送は今回は行わない（移送する場合は別フェーズで扱う）
+
+### D4：LATEST 再生成の前提条件
+
+- LATEST.md の再生成にあたり、**CLAUDE.md CURRENT STATE（2026-04-12）を最新事実として採用しない**
+- 上目黒 / 新丸子 / 評価OS / 営業資料 / 現場進捗は **owner の最新状況入力後に反映**する
+- それまでは LATEST 全面再生成を実行しない
+
+### 補足
+
+- **本エントリは裁定記録のみ。対象ファイル（LATEST / CLAUDE.md / ROADMAP / THREAD_INDEX / current_focus）の編集は後続の実行ステップで行う**
+- 根拠: Recovery Execution R-08A Freshness Review（2026-07-08）
+- 承認: せいさん（2026-07-08）/ Recovery Execution R-08B
+
